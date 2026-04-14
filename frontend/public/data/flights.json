@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-14T20:22:10.392240",
+  "generated_at": "2026-04-14T20:24:35.770123",
   "weeks": [
     {
       "week": {
@@ -294,10 +294,140 @@
           "price_eur": 630.0
         }
       ]
+    },
+    {
+      "week": {
+        "week_number": 3,
+        "wednesday": "2026-04-29",
+        "thursday": "2026-04-30",
+        "sunday": "2026-05-03",
+        "label": "Apr 29 / 30 → 3 May 2026"
+      },
+      "deals": [
+        {
+          "origin_iata": "AMS",
+          "origin_name": "Amsterdam Schiphol",
+          "country": "NL",
+          "outbound_date": "2026-04-30",
+          "outbound_day": "Thursday",
+          "outbound_dep": "7:20 AM on Thu, Apr 30",
+          "outbound_arr": "10:30 AM on Thu, Apr 30",
+          "outbound_airline": "easyJet",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_dep": "9:55 AM on Sun, May 3",
+          "return_arr": "4:55 PM on Sun, May 3",
+          "return_airline": "Scandinavian Airlines",
+          "return_stops": 1,
+          "price_eur": 308.0
+        },
+        {
+          "origin_iata": "BRU",
+          "origin_name": "Brussels Zaventem",
+          "country": "BE",
+          "outbound_date": "2026-04-29",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "8:15 PM on Wed, Apr 29",
+          "outbound_arr": "11:10 PM on Wed, Apr 29",
+          "outbound_airline": "Vueling",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_dep": "6:20 AM on Sun, May 3",
+          "return_arr": "4:40 PM on Sun, May 3",
+          "return_airline": "Norwegian",
+          "return_stops": 1,
+          "price_eur": 316.0
+        },
+        {
+          "origin_iata": "BRU",
+          "origin_name": "Brussels Zaventem",
+          "country": "BE",
+          "outbound_date": "2026-04-30",
+          "outbound_day": "Thursday",
+          "outbound_dep": "9:55 PM on Thu, Apr 30",
+          "outbound_arr": "12:50 AM on Fri, May 1",
+          "outbound_airline": "Vueling",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_dep": "6:20 AM on Sun, May 3",
+          "return_arr": "4:40 PM on Sun, May 3",
+          "return_airline": "Norwegian",
+          "return_stops": 1,
+          "price_eur": 323.0
+        },
+        {
+          "origin_iata": "EIN",
+          "origin_name": "Eindhoven",
+          "country": "NL",
+          "outbound_date": "2026-04-30",
+          "outbound_day": "Thursday",
+          "outbound_dep": "11:30 AM on Thu, Apr 30",
+          "outbound_arr": "2:30 PM on Thu, Apr 30",
+          "outbound_airline": "Ryanair",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_dep": "7:50 AM on Sun, May 3",
+          "return_arr": "10:45 AM on Sun, May 3",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 354.0
+        },
+        {
+          "origin_iata": "EIN",
+          "origin_name": "Eindhoven",
+          "country": "NL",
+          "outbound_date": "2026-04-29",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "6:15 PM on Wed, Apr 29",
+          "outbound_arr": "9:15 PM on Wed, Apr 29",
+          "outbound_airline": "Ryanair",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_dep": "7:50 AM on Sun, May 3",
+          "return_arr": "10:45 AM on Sun, May 3",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 358.0
+        },
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-04-29",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "7:50 AM on Wed, Apr 29",
+          "outbound_arr": "10:45 AM on Wed, Apr 29",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_dep": "12:10 PM on Sun, May 3",
+          "return_arr": "8:20 PM on Sun, May 3",
+          "return_airline": "British Airways",
+          "return_stops": 1,
+          "price_eur": 485.0
+        },
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-04-30",
+          "outbound_day": "Thursday",
+          "outbound_dep": "7:50 AM on Thu, Apr 30",
+          "outbound_arr": "10:45 AM on Thu, Apr 30",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_dep": "12:10 PM on Sun, May 3",
+          "return_arr": "8:20 PM on Sun, May 3",
+          "return_airline": "British Airways",
+          "return_stops": 1,
+          "price_eur": 500.0
+        }
+      ]
     }
   ],
   "progress": {
-    "completed": 2,
+    "completed": 3,
     "total": 26
   }
 }
