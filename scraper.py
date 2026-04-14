@@ -15,7 +15,7 @@ from datetime import datetime
 
 from flights.config import GITHUB_REPO, GITHUB_TOKEN, WEEKS_AHEAD
 from flights.github_push import push_flights_json
-from flights.search import build_weeks, get_client, search_all_deals
+from flights.search import build_weeks, search_all_deals
 
 logging.basicConfig(
     level=logging.INFO,
@@ -27,7 +27,6 @@ logger = logging.getLogger(__name__)
 
 def main() -> None:
     logger.info("Malaga flight tracker starting")
-    client = get_client()
     weeks = build_weeks(WEEKS_AHEAD)
     logger.info(
         "Searching %d weeks (%s → %s)",
@@ -39,7 +38,7 @@ def main() -> None:
     weeks_data = []
     for i, week in enumerate(weeks, 1):
         logger.info("[%d/%d] %s", i, len(weeks), week["label"])
-        deals = search_all_deals(week, client)
+        deals = search_all_deals(week)
         weeks_data.append({"week": week, "deals": [d.to_dict() for d in deals]})
         if deals:
             cheapest = deals[0]

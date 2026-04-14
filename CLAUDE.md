@@ -12,7 +12,7 @@ week by week.
 ## Stack
 
 - **Python** via **uv** (`uv run python scraper.py`)
-- **Amadeus API** for real flight prices (free tier: 2 000 calls/month)
+- **fast-flights** library (unofficial Google Flights client — free, no API key)
 - **GitHub Contents API** to push `flights.json` and trigger a Pages rebuild
 - **React + Vite** frontend, deployed via GitHub Actions to GitHub Pages
 - **Hetzner server** (same as iliana_scraper: `root@46.225.235.220`, SSH key `~/.ssh/hetzner_id`)
@@ -44,11 +44,11 @@ cd frontend && npm run build
 Copy `.env.example` to `.env`:
 
 ```
-AMADEUS_CLIENT_ID=      # from https://developers.amadeus.com
-AMADEUS_CLIENT_SECRET=  # same
-GITHUB_TOKEN=           # PAT with repo scope
-GITHUB_REPO=            # samkooijman99/malaga_tracker
+GITHUB_TOKEN=   # PAT with repo scope (so the scraper can commit flights.json)
+GITHUB_REPO=    # samkooijman99/malaga_tracker
 ```
+
+No flight API key is required — `fast-flights` queries Google Flights directly.
 
 The `.env` is also copied to the Hetzner server by `setup_server.py`.
 
@@ -84,9 +84,11 @@ highlighted green.
 - **Frontend**: `pages.yml` builds Vite and deploys to GitHub Pages whenever
   `frontend/**` changes (which includes the data file pushed by the scraper).
 
-## API limits
+## Rate / volume
 
-Amadeus free tier: **2 000 calls / month**.
-Each weekly scraper run makes ~208 calls (4 airports × 2 days × 26 weeks).
-Running once per week = ~832 calls/month — comfortably within the free tier.
-Running daily would exceed the limit; increase to a paid plan if needed.
+fast-flights has no documented limit but hammering Google will get you
+blocked. Each run does 3 searches per airport per week (2 outbound + 1
+shared return) = 4 × 3 × 26 = **312 searches per run**, with a 1.5 s
+delay between calls (~8 min total). Weekly cron is the recommended
+cadence; daily should still work but adjust `RATE_LIMIT_DELAY` up if
+Google starts returning empty results.

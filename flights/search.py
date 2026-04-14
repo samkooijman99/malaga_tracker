@@ -1,64 +1,46 @@
 """
-Flight search via the Amadeus API.
+Flight search via the fast-flights library (Google Flights, unofficial).
 
-Generates a list of weeks (Wed/Thu departure + Sun return) for the next
-N weeks, then queries Amadeus for round-trip flight offers from each
-NL/BE airport to AGP and returns the cheapest deal per combo.
+For each week in the next N weeks, queries:
+  - one-way outbound on Wed and Thu from each origin airport to AGP
+  - one-way return on Sun from AGP to each origin airport (shared across
+    Wed/Thu outbound to save calls)
+
+Sums the two one-way prices to form a "two-one-way" round trip deal.
 """
 
 import logging
+import re
 import time
 from datetime import date, timedelta
 
-from amadeus import Client, ResponseError
+from fast_flights import FlightData, Passengers, get_flights
 
-from .config import (
-    AIRPORTS,
-    DEPARTURE_WEEKDAYS,
-    DESTINATION,
-    AMADEUS_CLIENT_ID,
-    AMADEUS_CLIENT_SECRET,
-    MAX_OFFERS_PER_QUERY,
-    RATE_LIMIT_DELAY,
-    WEEKS_AHEAD,
-)
+from .config import AIRPORTS, DESTINATION, RATE_LIMIT_DELAY, WEEKS_AHEAD
 from .models import Deal
 
 logger = logging.getLogger(__name__)
 
-# IATA carrier code → readable name
-AIRLINE_NAMES: dict[str, str] = {
-    "FR": "Ryanair",
-    "HV": "Transavia",
-    "VY": "Vueling",
-    "U2": "easyJet",
-    "SN": "Brussels Airlines",
-    "KL": "KLM",
-    "IB": "Iberia",
-    "W6": "Wizz Air",
-    "PC": "Pegasus",
-    "TO": "Transavia France",
-    "A5": "HOP!",
-    "EW": "Eurowings",
-}
+_PRICE_RE = re.compile(r"\d+(?:\.\d+)?")
 
 
-def get_client() -> Client:
-    return Client(
-        client_id=AMADEUS_CLIENT_ID,
-        client_secret=AMADEUS_CLIENT_SECRET,
-    )
+def _parse_price(price_str: str | None) -> float | None:
+    """Extract a numeric price from strings like '€123', '€1,234', '$99.50'."""
+    if not price_str:
+        return None
+    cleaned = price_str.replace(",", "").replace("\xa0", " ")
+    match = _PRICE_RE.search(cleaned)
+    if not match:
+        return None
+    try:
+        return float(match.group())
+    except ValueError:
+        return None
 
 
 def build_weeks(weeks_ahead: int = WEEKS_AHEAD) -> list[dict]:
-    """
-    Return a list of week dicts covering the next `weeks_ahead` weeks.
-
-    Each dict has:
-      week_number, wednesday, thursday, sunday (ISO date strings), label
-    """
+    """Return a list of week dicts covering the next N weeks."""
     today = date.today()
-    # Find next Wednesday that isn't today
     days_to_wed = (2 - today.weekday()) % 7
     if days_to_wed == 0:
         days_to_wed = 7
@@ -68,7 +50,7 @@ def build_weeks(weeks_ahead: int = WEEKS_AHEAD) -> list[dict]:
     for i in range(weeks_ahead):
         wed = first_wed + timedelta(weeks=i)
         thu = wed + timedelta(days=1)
-        sun = wed + timedelta(days=4)  # Wed + 4 days = Sun
+        sun = wed + timedelta(days=4)
         weeks.append(
             {
                 "week_number": i + 1,
@@ -81,80 +63,75 @@ def build_weeks(weeks_ahead: int = WEEKS_AHEAD) -> list[dict]:
     return weeks
 
 
-def _parse_itinerary(itin: dict) -> tuple[str, str, str, int]:
-    """Return (dep_time HH:MM, arr_time HH:MM, airline name, num_stops)."""
-    segs = itin["segments"]
-    dep_time = segs[0]["departure"]["at"][11:16]
-    arr_time = segs[-1]["arrival"]["at"][11:16]
-    carrier = segs[0]["carrierCode"]
-    airline = AIRLINE_NAMES.get(carrier, carrier)
-    stops = len(segs) - 1
-    return dep_time, arr_time, airline, stops
-
-
-def _search_round_trip(
-    client: Client, origin: str, outbound_date: str, return_date: str
-) -> Deal | None:
-    """Query Amadeus for the cheapest round trip on a specific date pair."""
-    origin_info = AIRPORTS[origin]
-    outbound_day = date.fromisoformat(outbound_date).strftime("%A")
-
+def _search_one_way(from_airport: str, to_airport: str, date_str: str):
+    """Return (flight, price_eur) for the cheapest one-way, or None."""
     try:
-        response = client.shopping.flight_offers_search.get(
-            originLocationCode=origin,
-            destinationLocationCode=DESTINATION,
-            departureDate=outbound_date,
-            returnDate=return_date,
-            adults=1,
-            currencyCode="EUR",
-            max=MAX_OFFERS_PER_QUERY,
+        result = get_flights(
+            flight_data=[
+                FlightData(date=date_str, from_airport=from_airport, to_airport=to_airport)
+            ],
+            trip="one-way",
+            seat="economy",
+            passengers=Passengers(adults=1, children=0, infants_in_seat=0, infants_on_lap=0),
+            fetch_mode="fallback",
         )
-    except ResponseError as exc:
-        logger.warning("Amadeus error %s→%s on %s: %s", origin, DESTINATION, outbound_date, exc)
+    except Exception as exc:  # fast-flights raises various exceptions
+        logger.warning("Search failed %s→%s on %s: %s", from_airport, to_airport, date_str, exc)
         return None
 
-    offers = response.data
-    if not offers:
+    if not result or not getattr(result, "flights", None):
         return None
 
-    offer = offers[0]  # already sorted cheapest-first by Amadeus
-    price = float(offer["price"]["grandTotal"])
-    out_dep, out_arr, out_airline, out_stops = _parse_itinerary(offer["itineraries"][0])
-    ret_dep, ret_arr, ret_airline, ret_stops = _parse_itinerary(offer["itineraries"][1])
-
-    return Deal(
-        origin_iata=origin,
-        origin_name=origin_info["name"],
-        country=origin_info["country"],
-        outbound_date=outbound_date,
-        outbound_day=outbound_day,
-        outbound_dep=out_dep,
-        outbound_arr=out_arr,
-        outbound_airline=out_airline,
-        outbound_stops=out_stops,
-        return_date=return_date,
-        return_dep=ret_dep,
-        return_arr=ret_arr,
-        return_airline=ret_airline,
-        return_stops=ret_stops,
-        price_eur=price,
-    )
+    priced = []
+    for f in result.flights:
+        p = _parse_price(getattr(f, "price", None))
+        if p is not None and p > 0:
+            priced.append((f, p))
+    if not priced:
+        return None
+    priced.sort(key=lambda x: x[1])
+    return priced[0]
 
 
-def search_all_deals(week: dict, client: Client) -> list[Deal]:
-    """
-    Search all airport × departure-day combos for a single week.
-    Returns deals sorted cheapest-first.
-    """
+def search_all_deals(week: dict) -> list[Deal]:
+    """Search all airport × outbound-day combos for one week."""
     deals: list[Deal] = []
-    outbound_dates = [week["wednesday"], week["thursday"]]
 
-    for origin in AIRPORTS:
-        for outbound_date in outbound_dates:
-            deal = _search_round_trip(client, origin, outbound_date, week["sunday"])
-            if deal:
-                deals.append(deal)
+    for origin, origin_info in AIRPORTS.items():
+        ret = _search_one_way(DESTINATION, origin, week["sunday"])
+        time.sleep(RATE_LIMIT_DELAY)
+        if not ret:
+            logger.info("  no return found for %s on %s", origin, week["sunday"])
+            continue
+        ret_flight, ret_price = ret
+
+        for outbound_date in (week["wednesday"], week["thursday"]):
+            out = _search_one_way(origin, DESTINATION, outbound_date)
             time.sleep(RATE_LIMIT_DELAY)
+            if not out:
+                continue
+            out_flight, out_price = out
+            outbound_day = date.fromisoformat(outbound_date).strftime("%A")
+
+            deals.append(
+                Deal(
+                    origin_iata=origin,
+                    origin_name=origin_info["name"],
+                    country=origin_info["country"],
+                    outbound_date=outbound_date,
+                    outbound_day=outbound_day,
+                    outbound_dep=getattr(out_flight, "departure", "") or "",
+                    outbound_arr=getattr(out_flight, "arrival", "") or "",
+                    outbound_airline=getattr(out_flight, "name", "") or "",
+                    outbound_stops=int(getattr(out_flight, "stops", 0) or 0),
+                    return_date=week["sunday"],
+                    return_dep=getattr(ret_flight, "departure", "") or "",
+                    return_arr=getattr(ret_flight, "arrival", "") or "",
+                    return_airline=getattr(ret_flight, "name", "") or "",
+                    return_stops=int(getattr(ret_flight, "stops", 0) or 0),
+                    price_eur=round(out_price + ret_price, 2),
+                )
+            )
 
     deals.sort(key=lambda d: d.price_eur)
     return deals
