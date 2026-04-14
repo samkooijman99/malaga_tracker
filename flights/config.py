@@ -21,4 +21,4 @@ DEPARTURE_WEEKDAYS = (2, 3)  # Wednesday, Thursday
 RETURN_WEEKDAY = 6            # Sunday
 
 WEEKS_AHEAD = 26
-RATE_LIMIT_DELAY = 1.5  # seconds between Google Flights scrapes (be polite)
+RATE_LIMIT_DELAY = 30  # seconds between Google Flights scrapes — generous gap to avoid blocking (≈2.6 h per run for 312 searches)
