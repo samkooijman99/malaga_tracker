@@ -23,3 +23,8 @@ RETURN_WEEKDAY = 6            # Sunday
 
 WEEKS_AHEAD = 26
 RATE_LIMIT_DELAY = float(os.environ.get("RATE_LIMIT_DELAY", "60"))  # seconds between Google Flights scrapes — overridable for initial backfill (e.g. RATE_LIMIT_DELAY=5)
+
+# Number of cheapest options to keep per search (same Google call; we just
+# parse more rows out of the response — no extra rate cost).
+MAX_OUTBOUND_OPTIONS = 2   # per (origin × day)
+MAX_RETURN_OPTIONS = 3     # per destination airport

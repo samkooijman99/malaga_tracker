@@ -16,7 +16,7 @@ from datetime import date, timedelta
 
 from fast_flights import FlightData, Passengers, get_flights
 
-from .config import AIRPORTS, DESTINATION, RATE_LIMIT_DELAY, WEEKS_AHEAD
+from .config import AIRPORTS, DESTINATION, MAX_OUTBOUND_OPTIONS, MAX_RETURN_OPTIONS, RATE_LIMIT_DELAY, WEEKS_AHEAD
 from .models import Deal
 
 logger = logging.getLogger(__name__)
@@ -63,8 +63,8 @@ def build_weeks(weeks_ahead: int = WEEKS_AHEAD) -> list[dict]:
     return weeks
 
 
-def _search_one_way(from_airport: str, to_airport: str, date_str: str):
-    """Return (flight, price_eur) for the cheapest one-way, or None."""
+def _search_top_n(from_airport: str, to_airport: str, date_str: str, n: int):
+    """Return top-n cheapest one-way results as list of (flight, price_eur)."""
     try:
         result = get_flights(
             flight_data=[
@@ -78,89 +78,91 @@ def _search_one_way(from_airport: str, to_airport: str, date_str: str):
         )
     except Exception as exc:  # fast-flights raises various exceptions
         logger.warning("Search failed %s→%s on %s: %s", from_airport, to_airport, date_str, exc)
-        return None
+        return []
 
     if not result or not getattr(result, "flights", None):
-        return None
+        return []
 
     priced = []
+    seen = set()  # dedupe identical flights (same airline+dep+arr)
     for f in result.flights:
         p = _parse_price(getattr(f, "price", None))
-        if p is not None and p > 0:
-            priced.append((f, p))
-    if not priced:
-        return None
+        if p is None or p <= 0:
+            continue
+        key = (getattr(f, "name", ""), getattr(f, "departure", ""), getattr(f, "arrival", ""))
+        if key in seen:
+            continue
+        seen.add(key)
+        priced.append((f, p))
+
     priced.sort(key=lambda x: x[1])
-    return priced[0]
+    return priced[:n]
 
 
 def search_all_deals(week: dict) -> list[Deal]:
     """
-    For one week:
-      - search AGP→each airport on Sunday (returns dict of per-airport returns)
-      - search each_airport→AGP on Wed and Thu
-      - pair each outbound with the cheapest return across ALL 4 airports
-        (NL/BE is small enough to land at any airport)
-    """
-    # 1. All returns — one per airport
-    returns: dict[str, tuple] = {}
-    for origin in AIRPORTS:
-        logger.info("  return AGP→%s on %s ...", origin, week["sunday"])
-        r = _search_one_way(DESTINATION, origin, week["sunday"])
-        time.sleep(RATE_LIMIT_DELAY)
-        if r:
-            returns[origin] = r
-            logger.info("    €%.0f via %s", r[1], r[0].name)
-        else:
-            logger.info("    none")
+    For one week, generate all reasonable outbound × return combinations.
 
-    if not returns:
+      - Top N returns per destination airport (N = MAX_RETURN_OPTIONS)
+      - Top M outbounds per (origin × Wed/Thu) (M = MAX_OUTBOUND_OPTIONS)
+      - Cross-product → each outbound gets paired with every return option
+        across all 4 airports, giving M × 4×N rows per (origin × day)
+    """
+    # 1. Top-N returns per airport — flatten into one list of (iata, flight, price)
+    all_returns: list[tuple[str, object, float]] = []
+    for origin in AIRPORTS:
+        logger.info("  returns AGP→%s on %s ...", origin, week["sunday"])
+        results = _search_top_n(DESTINATION, origin, week["sunday"], MAX_RETURN_OPTIONS)
+        time.sleep(RATE_LIMIT_DELAY)
+        if not results:
+            logger.info("    none")
+            continue
+        for rf, rp in results:
+            logger.info("    €%.0f via %s", rp, rf.name)
+            all_returns.append((origin, rf, rp))
+
+    if not all_returns:
         return []
 
-    # 2. All outbounds — per origin × Wed/Thu; pair each with cheapest return
+    # 2. Top-M outbounds per (origin × day), each paired with every return option
     deals: list[Deal] = []
     for origin, origin_info in AIRPORTS.items():
         for outbound_date in (week["wednesday"], week["thursday"]):
-            logger.info("  outbound %s→AGP on %s ...", origin, outbound_date)
-            out = _search_one_way(origin, DESTINATION, outbound_date)
+            logger.info("  outbounds %s→AGP on %s ...", origin, outbound_date)
+            outs = _search_top_n(origin, DESTINATION, outbound_date, MAX_OUTBOUND_OPTIONS)
             time.sleep(RATE_LIMIT_DELAY)
-            if not out:
+            if not outs:
                 logger.info("    none")
                 continue
-            out_flight, out_price = out
-
-            # Pick cheapest return across all airports (may differ from origin)
-            ret_iata, (ret_flight, ret_price) = min(returns.items(), key=lambda kv: kv[1][1])
-            total = out_price + ret_price
-            logger.info(
-                "    outbound €%.0f via %s → pair with AGP→%s €%.0f = €%.0f total",
-                out_price, out_flight.name, ret_iata, ret_price, total,
-            )
 
             outbound_day = date.fromisoformat(outbound_date).strftime("%A")
-            deals.append(
-                Deal(
-                    origin_iata=origin,
-                    origin_name=origin_info["name"],
-                    country=origin_info["country"],
-                    outbound_date=outbound_date,
-                    outbound_day=outbound_day,
-                    outbound_dep=getattr(out_flight, "departure", "") or "",
-                    outbound_arr=getattr(out_flight, "arrival", "") or "",
-                    outbound_airline=getattr(out_flight, "name", "") or "",
-                    outbound_stops=int(getattr(out_flight, "stops", 0) or 0),
-                    outbound_price_eur=round(out_price, 2),
-                    return_date=week["sunday"],
-                    return_iata=ret_iata,
-                    return_name=AIRPORTS[ret_iata]["name"],
-                    return_dep=getattr(ret_flight, "departure", "") or "",
-                    return_arr=getattr(ret_flight, "arrival", "") or "",
-                    return_airline=getattr(ret_flight, "name", "") or "",
-                    return_stops=int(getattr(ret_flight, "stops", 0) or 0),
-                    return_price_eur=round(ret_price, 2),
-                    price_eur=round(total, 2),
-                )
-            )
+            for out_flight, out_price in outs:
+                logger.info("    outbound €%.0f via %s", out_price, out_flight.name)
+                for ret_iata, ret_flight, ret_price in all_returns:
+                    deals.append(
+                        Deal(
+                            origin_iata=origin,
+                            origin_name=origin_info["name"],
+                            country=origin_info["country"],
+                            outbound_date=outbound_date,
+                            outbound_day=outbound_day,
+                            outbound_dep=getattr(out_flight, "departure", "") or "",
+                            outbound_arr=getattr(out_flight, "arrival", "") or "",
+                            outbound_airline=getattr(out_flight, "name", "") or "",
+                            outbound_stops=int(getattr(out_flight, "stops", 0) or 0),
+                            outbound_price_eur=round(out_price, 2),
+                            return_date=week["sunday"],
+                            return_iata=ret_iata,
+                            return_name=AIRPORTS[ret_iata]["name"],
+                            return_dep=getattr(ret_flight, "departure", "") or "",
+                            return_arr=getattr(ret_flight, "arrival", "") or "",
+                            return_airline=getattr(ret_flight, "name", "") or "",
+                            return_stops=int(getattr(ret_flight, "stops", 0) or 0),
+                            return_price_eur=round(ret_price, 2),
+                            price_eur=round(out_price + ret_price, 2),
+                        )
+                    )
 
     deals.sort(key=lambda d: d.price_eur)
-    return deals
+    # Cap per week — avoid exposing 100+ redundant combos
+    return deals[:40]
