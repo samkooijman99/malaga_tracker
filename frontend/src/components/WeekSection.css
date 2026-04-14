@@ -136,3 +136,95 @@ tbody td {
 .price-cheapest { color: var(--green); }
 .price-mid       { color: var(--amber); }
 .price-high      { color: var(--red); }
+
+/* === Mobile: convert table rows into cards === */
+@media (max-width: 700px) {
+  .week-section { border-radius: 6px; }
+  .week-header { padding: 10px 12px; gap: 10px; }
+  .week-label { font-size: 13px; }
+  .week-dates { font-size: 10px; }
+  .week-best-price { font-size: 16px; }
+
+  .week-body { overflow: visible; }
+  table, thead, tbody, th, tr, td { display: block; }
+  thead { display: none; }
+
+  tbody tr {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 10px 8px;
+    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 6px 12px;
+    background: var(--surface);
+  }
+  tbody tr:last-child { border-bottom: 1px solid var(--border); }
+
+  tbody td {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    border: none;
+    font-size: 13px;
+  }
+  tbody td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  /* Hide the "Day" cell label (short content, goes next to airport) */
+  tbody td[data-label="Day"] {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    text-align: right;
+  }
+  tbody td[data-label="Airport"] { grid-column: 1; grid-row: 1; }
+  tbody td[data-label="Outbound"] { grid-column: 1 / -1; }
+  tbody td[data-label="Outbound"] + td[data-label="Airline"] {
+    grid-column: 1 / -1;
+    margin-top: -4px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  tbody td[data-label="Outbound"] + td[data-label="Airline"]::before { display: none; }
+  tbody td[data-label="Return"] { grid-column: 1 / -1; }
+  tbody td[data-label="Return"] + td[data-label="Airline"] {
+    grid-column: 1 / -1;
+    margin-top: -4px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  tbody td[data-label="Return"] + td[data-label="Airline"]::before { display: none; }
+
+  tbody td[data-label="Price"] {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 18px;
+    padding-top: 4px;
+    border-top: 1px dashed var(--border);
+    margin-top: 4px;
+  }
+  tbody td[data-label="Price"]::before {
+    margin-bottom: 0;
+    margin-right: auto;
+    font-size: 11px;
+  }
+
+  .row-cheapest {
+    border-color: var(--green) !important;
+    border-width: 2px !important;
+  }
+
+  .airport-name { display: block; }
+  .time-cell { flex-direction: row; }
+}

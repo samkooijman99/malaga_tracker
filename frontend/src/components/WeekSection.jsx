@@ -56,22 +56,22 @@ export default function WeekSection({ week, deals }) {
             <tbody>
               {deals.map((deal, i) => (
                 <tr key={i} className={deal.price_eur === cheapest ? 'row-cheapest' : ''}>
-                  <td>
+                  <td data-label="Airport">
                     <span className="iata">{deal.origin_iata}</span>
                     <span className="airport-name">{deal.origin_name}</span>
                   </td>
-                  <td>{deal.outbound_day.slice(0, 3)}</td>
-                  <td className="time-cell">
+                  <td data-label="Day">{deal.outbound_day.slice(0, 3)}</td>
+                  <td className="time-cell" data-label="Outbound">
                     {deal.outbound_dep}&thinsp;&rarr;&thinsp;{deal.outbound_arr}
                     <StopsBadge stops={deal.outbound_stops} />
                   </td>
-                  <td>{deal.outbound_airline}</td>
-                  <td className="time-cell">
+                  <td data-label="Airline">{deal.outbound_airline}</td>
+                  <td className="time-cell" data-label="Return">
                     {deal.return_dep}&thinsp;&rarr;&thinsp;{deal.return_arr}
                     <StopsBadge stops={deal.return_stops} />
                   </td>
-                  <td>{deal.return_airline}</td>
-                  <td className={`price-col ${priceClass(deal.price_eur, cheapest)}`}>
+                  <td data-label="Airline">{deal.return_airline}</td>
+                  <td data-label="Price" className={`price-col ${priceClass(deal.price_eur, cheapest)}`}>
                     &euro;{Math.round(deal.price_eur)}
                   </td>
                 </tr>
