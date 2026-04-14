@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-14T20:45:33.613776",
+  "generated_at": "2026-04-14T20:47:14.376481",
   "weeks": [
     {
       "week": {
@@ -489,10 +489,173 @@
           "price_eur": 397.0
         }
       ]
+    },
+    {
+      "week": {
+        "week_number": 4,
+        "wednesday": "2026-05-06",
+        "thursday": "2026-05-07",
+        "sunday": "2026-05-10",
+        "label": "May 6 / 7 → 10 May 2026"
+      },
+      "deals": [
+        {
+          "origin_iata": "BRU",
+          "origin_name": "Brussels Zaventem",
+          "country": "BE",
+          "outbound_date": "2026-05-06",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "8:15 PM on Wed, May 6",
+          "outbound_arr": "11:10 PM on Wed, May 6",
+          "outbound_airline": "Vueling",
+          "outbound_stops": 0,
+          "return_date": "2026-05-10",
+          "return_iata": "EIN",
+          "return_name": "Eindhoven",
+          "return_dep": "7:50 AM on Sun, May 10",
+          "return_arr": "10:45 AM on Sun, May 10",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 129.0
+        },
+        {
+          "origin_iata": "BRU",
+          "origin_name": "Brussels Zaventem",
+          "country": "BE",
+          "outbound_date": "2026-05-07",
+          "outbound_day": "Thursday",
+          "outbound_dep": "6:00 AM on Thu, May 7",
+          "outbound_arr": "9:05 AM on Thu, May 7",
+          "outbound_airline": "TUI fly",
+          "outbound_stops": 0,
+          "return_date": "2026-05-10",
+          "return_iata": "EIN",
+          "return_name": "Eindhoven",
+          "return_dep": "7:50 AM on Sun, May 10",
+          "return_arr": "10:45 AM on Sun, May 10",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 156.0
+        },
+        {
+          "origin_iata": "EIN",
+          "origin_name": "Eindhoven",
+          "country": "NL",
+          "outbound_date": "2026-05-07",
+          "outbound_day": "Thursday",
+          "outbound_dep": "11:30 AM on Thu, May 7",
+          "outbound_arr": "2:30 PM on Thu, May 7",
+          "outbound_airline": "Ryanair",
+          "outbound_stops": 0,
+          "return_date": "2026-05-10",
+          "return_iata": "EIN",
+          "return_name": "Eindhoven",
+          "return_dep": "7:50 AM on Sun, May 10",
+          "return_arr": "10:45 AM on Sun, May 10",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 167.0
+        },
+        {
+          "origin_iata": "AMS",
+          "origin_name": "Amsterdam Schiphol",
+          "country": "NL",
+          "outbound_date": "2026-05-06",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "6:50 PM on Wed, May 6",
+          "outbound_arr": "10:05 PM on Wed, May 6",
+          "outbound_airline": "Vueling",
+          "outbound_stops": 0,
+          "return_date": "2026-05-10",
+          "return_iata": "EIN",
+          "return_name": "Eindhoven",
+          "return_dep": "7:50 AM on Sun, May 10",
+          "return_arr": "10:45 AM on Sun, May 10",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 170.0
+        },
+        {
+          "origin_iata": "EIN",
+          "origin_name": "Eindhoven",
+          "country": "NL",
+          "outbound_date": "2026-05-06",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "6:15 PM on Wed, May 6",
+          "outbound_arr": "9:15 PM on Wed, May 6",
+          "outbound_airline": "Ryanair",
+          "outbound_stops": 0,
+          "return_date": "2026-05-10",
+          "return_iata": "EIN",
+          "return_name": "Eindhoven",
+          "return_dep": "7:50 AM on Sun, May 10",
+          "return_arr": "10:45 AM on Sun, May 10",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 172.0
+        },
+        {
+          "origin_iata": "AMS",
+          "origin_name": "Amsterdam Schiphol",
+          "country": "NL",
+          "outbound_date": "2026-05-07",
+          "outbound_day": "Thursday",
+          "outbound_dep": "6:50 PM on Thu, May 7",
+          "outbound_arr": "10:05 PM on Thu, May 7",
+          "outbound_airline": "Vueling",
+          "outbound_stops": 0,
+          "return_date": "2026-05-10",
+          "return_iata": "EIN",
+          "return_name": "Eindhoven",
+          "return_dep": "7:50 AM on Sun, May 10",
+          "return_arr": "10:45 AM on Sun, May 10",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 221.0
+        },
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-05-07",
+          "outbound_day": "Thursday",
+          "outbound_dep": "3:55 PM on Thu, May 7",
+          "outbound_arr": "6:50 PM on Thu, May 7",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "return_date": "2026-05-10",
+          "return_iata": "EIN",
+          "return_name": "Eindhoven",
+          "return_dep": "7:50 AM on Sun, May 10",
+          "return_arr": "10:45 AM on Sun, May 10",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 289.0
+        },
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-05-06",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "7:50 AM on Wed, May 6",
+          "outbound_arr": "10:45 AM on Wed, May 6",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "return_date": "2026-05-10",
+          "return_iata": "EIN",
+          "return_name": "Eindhoven",
+          "return_dep": "7:50 AM on Sun, May 10",
+          "return_arr": "10:45 AM on Sun, May 10",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 308.0
+        }
+      ]
     }
   ],
   "progress": {
-    "completed": 3,
+    "completed": 4,
     "total": 26
   }
 }
