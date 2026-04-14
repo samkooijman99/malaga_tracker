@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-14T20:36:20.147712",
+  "generated_at": "2026-04-14T20:38:00.909142",
   "weeks": [
     {
       "week": {
@@ -882,10 +882,157 @@
           "price_eur": 497.0
         }
       ]
+    },
+    {
+      "week": {
+        "week_number": 7,
+        "wednesday": "2026-05-27",
+        "thursday": "2026-05-28",
+        "sunday": "2026-05-31",
+        "label": "May 27 / 28 → 31 May 2026"
+      },
+      "deals": [
+        {
+          "origin_iata": "AMS",
+          "origin_name": "Amsterdam Schiphol",
+          "country": "NL",
+          "outbound_date": "2026-05-27",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "7:20 PM on Wed, May 27",
+          "outbound_arr": "10:25 PM on Wed, May 27",
+          "outbound_airline": "Ryanair",
+          "outbound_stops": 0,
+          "return_date": "2026-05-31",
+          "return_dep": "6:10 AM on Sun, May 31",
+          "return_arr": "9:20 AM on Sun, May 31",
+          "return_airline": "Vueling",
+          "return_stops": 0,
+          "price_eur": 152.0
+        },
+        {
+          "origin_iata": "EIN",
+          "origin_name": "Eindhoven",
+          "country": "NL",
+          "outbound_date": "2026-05-27",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "6:15 PM on Wed, May 27",
+          "outbound_arr": "9:15 PM on Wed, May 27",
+          "outbound_airline": "Ryanair",
+          "outbound_stops": 0,
+          "return_date": "2026-05-31",
+          "return_dep": "7:50 AM on Sun, May 31",
+          "return_arr": "10:45 AM on Sun, May 31",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 157.0
+        },
+        {
+          "origin_iata": "EIN",
+          "origin_name": "Eindhoven",
+          "country": "NL",
+          "outbound_date": "2026-05-28",
+          "outbound_day": "Thursday",
+          "outbound_dep": "3:10 PM on Thu, May 28",
+          "outbound_arr": "6:00 PM on Thu, May 28",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "return_date": "2026-05-31",
+          "return_dep": "7:50 AM on Sun, May 31",
+          "return_arr": "10:45 AM on Sun, May 31",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "price_eur": 191.0
+        },
+        {
+          "origin_iata": "AMS",
+          "origin_name": "Amsterdam Schiphol",
+          "country": "NL",
+          "outbound_date": "2026-05-28",
+          "outbound_day": "Thursday",
+          "outbound_dep": "8:00 PM on Thu, May 28",
+          "outbound_arr": "11:00 PM on Thu, May 28",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "return_date": "2026-05-31",
+          "return_dep": "6:10 AM on Sun, May 31",
+          "return_arr": "9:20 AM on Sun, May 31",
+          "return_airline": "Vueling",
+          "return_stops": 0,
+          "price_eur": 208.0
+        },
+        {
+          "origin_iata": "BRU",
+          "origin_name": "Brussels Zaventem",
+          "country": "BE",
+          "outbound_date": "2026-05-27",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "8:15 PM on Wed, May 27",
+          "outbound_arr": "11:10 PM on Wed, May 27",
+          "outbound_airline": "Vueling",
+          "outbound_stops": 0,
+          "return_date": "2026-05-31",
+          "return_dep": "6:45 PM on Sun, May 31",
+          "return_arr": "9:55 PM on Sun, May 31",
+          "return_airline": "TUI fly",
+          "return_stops": 0,
+          "price_eur": 211.0
+        },
+        {
+          "origin_iata": "BRU",
+          "origin_name": "Brussels Zaventem",
+          "country": "BE",
+          "outbound_date": "2026-05-28",
+          "outbound_day": "Thursday",
+          "outbound_dep": "6:00 AM on Thu, May 28",
+          "outbound_arr": "9:05 AM on Thu, May 28",
+          "outbound_airline": "TUI fly",
+          "outbound_stops": 0,
+          "return_date": "2026-05-31",
+          "return_dep": "6:45 PM on Sun, May 31",
+          "return_arr": "9:55 PM on Sun, May 31",
+          "return_airline": "TUI fly",
+          "return_stops": 0,
+          "price_eur": 240.0
+        },
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-05-27",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "7:50 AM on Wed, May 27",
+          "outbound_arr": "10:45 AM on Wed, May 27",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "return_date": "2026-05-31",
+          "return_dep": "12:55 PM on Sun, May 31",
+          "return_arr": "3:45 PM on Sun, May 31",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "price_eur": 481.0
+        },
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-05-28",
+          "outbound_day": "Thursday",
+          "outbound_dep": "3:55 PM on Thu, May 28",
+          "outbound_arr": "6:50 PM on Thu, May 28",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "return_date": "2026-05-31",
+          "return_dep": "12:55 PM on Sun, May 31",
+          "return_arr": "3:45 PM on Sun, May 31",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "price_eur": 481.0
+        }
+      ]
     }
   ],
   "progress": {
-    "completed": 6,
+    "completed": 7,
     "total": 26
   }
 }
