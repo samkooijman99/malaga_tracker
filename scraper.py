@@ -15,6 +15,7 @@ from datetime import datetime
 
 from flights.config import GITHUB_REPO, GITHUB_TOKEN, WEEKS_AHEAD
 from flights.github_push import push_flights_json
+from flights.history import update_history
 from flights.search import build_weeks, search_all_deals
 
 logging.basicConfig(
@@ -62,6 +63,11 @@ def main() -> None:
             push_flights_json(payload, GITHUB_TOKEN, GITHUB_REPO)
         except Exception as exc:  # don't abort the run on a transient GitHub error
             logger.warning("  GitHub push failed (continuing): %s", exc)
+
+    try:
+        update_history(weeks_data, GITHUB_TOKEN, GITHUB_REPO)
+    except Exception as exc:
+        logger.warning("history update failed: %s", exc)
 
     logger.info("Done — %d weeks committed.", len(weeks_data))
 

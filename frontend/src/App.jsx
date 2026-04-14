@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import WeekSection from './components/WeekSection.jsx'
+import Analysis from './Analysis.jsx'
 import './App.css'
 
 const DATA_URL = import.meta.env.BASE_URL + 'data/flights.json'
@@ -22,6 +23,7 @@ export default function App() {
   const [error, setError] = useState(null)
   const [filter, setFilter] = useState('ALL')
   const [eveningOnly, setEveningOnly] = useState(false)
+  const [view, setView] = useState('main')  // 'main' | 'analysis'
 
   useEffect(() => {
     fetch(DATA_URL, { cache: 'no-cache' })
@@ -57,9 +59,21 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div className="header-inner">
-          <h1>Malaga Flight Tracker</h1>
+          <div className="header-top">
+            <h1>Malaga Flight Tracker</h1>
+            <nav className="nav">
+              <button
+                className={view === 'main' ? 'active' : ''}
+                onClick={() => setView('main')}
+              >Deals</button>
+              <button
+                className={view === 'analysis' ? 'active' : ''}
+                onClick={() => setView('analysis')}
+              >Analysis</button>
+            </nav>
+          </div>
           <p className="subtitle">AMS / BRU / EIN / RTM &rarr; AGP &nbsp;&bull;&nbsp; Wed/Thu out, Sun return</p>
-          {globalCheapest && (
+          {view === 'main' && globalCheapest && (
             <p className="global-cheapest">
               Cheapest in 6 months: <strong>&euro;{Math.round(globalCheapest)}</strong>
             </p>
@@ -75,27 +89,31 @@ export default function App() {
         </div>
       </header>
 
-      <div className="filter-bar">
-        {airports.map(ap => (
+      {view === 'main' && (
+        <div className="filter-bar">
+          {airports.map(ap => (
+            <button
+              key={ap}
+              className={filter === ap ? 'active' : ''}
+              onClick={() => setFilter(ap)}
+            >
+              {ap}
+            </button>
+          ))}
           <button
-            key={ap}
-            className={filter === ap ? 'active' : ''}
-            onClick={() => setFilter(ap)}
+            className={`time-filter ${eveningOnly ? 'active' : ''}`}
+            onClick={() => setEveningOnly(v => !v)}
+            title="Only show deals whose outbound flight departs at or after 17:00"
           >
-            {ap}
+            {eveningOnly ? '✓ ' : ''}Evening only dep (17:00+)
           </button>
-        ))}
-        <button
-          className={`time-filter ${eveningOnly ? 'active' : ''}`}
-          onClick={() => setEveningOnly(v => !v)}
-          title="Only show deals whose outbound flight departs at or after 17:00"
-        >
-          {eveningOnly ? '✓ ' : ''}Evening only dep (17:00+)
-        </button>
-      </div>
+        </div>
+      )}
 
       <main className="main">
-        {data.weeks.length === 0 ? (
+        {view === 'analysis' ? (
+          <Analysis />
+        ) : data.weeks.length === 0 ? (
           <div className="state-msg">
             <p><strong>No flight data yet.</strong></p>
             <p className="muted">
