@@ -10,6 +10,7 @@ Usage:
 
 import subprocess
 import sys
+from pathlib import Path
 
 SERVER = "root@46.225.235.220"
 SSH_KEY = "~/.ssh/hetzner_id"
@@ -41,6 +42,14 @@ run(
         f"{SERVER}:{REMOTE_DIR}/",
     ],
 )
+
+if Path(".env").exists():
+    run(
+        "Push .env",
+        ["scp", "-i", SSH_KEY, ".env", f"{SERVER}:{REMOTE_DIR}/.env"],
+    )
+else:
+    print("⚠  No local .env — skipping (server may already have one).")
 
 run(
     "uv sync",
