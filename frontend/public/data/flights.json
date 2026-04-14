@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-14T20:43:55.039677",
+  "generated_at": "2026-04-14T20:45:33.613776",
   "weeks": [
     {
       "week": {
@@ -326,10 +326,173 @@
           "price_eur": 532.0
         }
       ]
+    },
+    {
+      "week": {
+        "week_number": 3,
+        "wednesday": "2026-04-29",
+        "thursday": "2026-04-30",
+        "sunday": "2026-05-03",
+        "label": "Apr 29 / 30 → 3 May 2026"
+      },
+      "deals": [
+        {
+          "origin_iata": "BRU",
+          "origin_name": "Brussels Zaventem",
+          "country": "BE",
+          "outbound_date": "2026-04-29",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "8:15 PM on Wed, Apr 29",
+          "outbound_arr": "11:10 PM on Wed, Apr 29",
+          "outbound_airline": "Vueling",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_iata": "AMS",
+          "return_name": "Amsterdam Schiphol",
+          "return_dep": "6:10 AM on Sun, May 3",
+          "return_arr": "9:20 AM on Sun, May 3",
+          "return_airline": "Vueling",
+          "return_stops": 0,
+          "price_eur": 329.0
+        },
+        {
+          "origin_iata": "BRU",
+          "origin_name": "Brussels Zaventem",
+          "country": "BE",
+          "outbound_date": "2026-04-30",
+          "outbound_day": "Thursday",
+          "outbound_dep": "9:55 PM on Thu, Apr 30",
+          "outbound_arr": "12:50 AM on Fri, May 1",
+          "outbound_airline": "Vueling",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_iata": "AMS",
+          "return_name": "Amsterdam Schiphol",
+          "return_dep": "6:10 AM on Sun, May 3",
+          "return_arr": "9:20 AM on Sun, May 3",
+          "return_airline": "Vueling",
+          "return_stops": 0,
+          "price_eur": 336.0
+        },
+        {
+          "origin_iata": "EIN",
+          "origin_name": "Eindhoven",
+          "country": "NL",
+          "outbound_date": "2026-04-30",
+          "outbound_day": "Thursday",
+          "outbound_dep": "11:30 AM on Thu, Apr 30",
+          "outbound_arr": "2:30 PM on Thu, Apr 30",
+          "outbound_airline": "Ryanair",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_iata": "AMS",
+          "return_name": "Amsterdam Schiphol",
+          "return_dep": "6:10 AM on Sun, May 3",
+          "return_arr": "9:20 AM on Sun, May 3",
+          "return_airline": "Vueling",
+          "return_stops": 0,
+          "price_eur": 341.0
+        },
+        {
+          "origin_iata": "EIN",
+          "origin_name": "Eindhoven",
+          "country": "NL",
+          "outbound_date": "2026-04-29",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "6:15 PM on Wed, Apr 29",
+          "outbound_arr": "9:15 PM on Wed, Apr 29",
+          "outbound_airline": "Ryanair",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_iata": "AMS",
+          "return_name": "Amsterdam Schiphol",
+          "return_dep": "6:10 AM on Sun, May 3",
+          "return_arr": "9:20 AM on Sun, May 3",
+          "return_airline": "Vueling",
+          "return_stops": 0,
+          "price_eur": 345.0
+        },
+        {
+          "origin_iata": "AMS",
+          "origin_name": "Amsterdam Schiphol",
+          "country": "NL",
+          "outbound_date": "2026-04-30",
+          "outbound_day": "Thursday",
+          "outbound_dep": "7:20 AM on Thu, Apr 30",
+          "outbound_arr": "10:30 AM on Thu, Apr 30",
+          "outbound_airline": "easyJet",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_iata": "AMS",
+          "return_name": "Amsterdam Schiphol",
+          "return_dep": "6:10 AM on Sun, May 3",
+          "return_arr": "9:20 AM on Sun, May 3",
+          "return_airline": "Vueling",
+          "return_stops": 0,
+          "price_eur": 359.0
+        },
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-04-29",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "7:50 AM on Wed, Apr 29",
+          "outbound_arr": "10:45 AM on Wed, Apr 29",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_iata": "AMS",
+          "return_name": "Amsterdam Schiphol",
+          "return_dep": "6:10 AM on Sun, May 3",
+          "return_arr": "9:20 AM on Sun, May 3",
+          "return_airline": "Vueling",
+          "return_stops": 0,
+          "price_eur": 382.0
+        },
+        {
+          "origin_iata": "AMS",
+          "origin_name": "Amsterdam Schiphol",
+          "country": "NL",
+          "outbound_date": "2026-04-29",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "2:45 PM on Wed, Apr 29",
+          "outbound_arr": "5:55 PM on Wed, Apr 29",
+          "outbound_airline": "easyJet",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_iata": "AMS",
+          "return_name": "Amsterdam Schiphol",
+          "return_dep": "6:10 AM on Sun, May 3",
+          "return_arr": "9:20 AM on Sun, May 3",
+          "return_airline": "Vueling",
+          "return_stops": 0,
+          "price_eur": 388.0
+        },
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-04-30",
+          "outbound_day": "Thursday",
+          "outbound_dep": "7:50 AM on Thu, Apr 30",
+          "outbound_arr": "10:45 AM on Thu, Apr 30",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "return_date": "2026-05-03",
+          "return_iata": "AMS",
+          "return_name": "Amsterdam Schiphol",
+          "return_dep": "6:10 AM on Sun, May 3",
+          "return_arr": "9:20 AM on Sun, May 3",
+          "return_airline": "Vueling",
+          "return_stops": 0,
+          "price_eur": 397.0
+        }
+      ]
     }
   ],
   "progress": {
-    "completed": 2,
+    "completed": 3,
     "total": 26
   }
 }
