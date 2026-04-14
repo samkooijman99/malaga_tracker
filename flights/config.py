@@ -27,4 +27,4 @@ RATE_LIMIT_DELAY = float(os.environ.get("RATE_LIMIT_DELAY", "60"))  # seconds be
 # Number of cheapest options to keep per search (same Google call; we just
 # parse more rows out of the response — no extra rate cost).
 MAX_OUTBOUND_OPTIONS = 2   # per (origin × day)
-MAX_RETURN_OPTIONS = 3     # per destination airport
+MAX_RETURN_OPTIONS = 5     # per destination airport

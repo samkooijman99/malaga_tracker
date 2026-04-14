@@ -165,4 +165,4 @@ def search_all_deals(week: dict) -> list[Deal]:
 
     deals.sort(key=lambda d: d.price_eur)
     # Cap per week — avoid exposing 100+ redundant combos
-    return deals[:40]
+    return deals[:60]
