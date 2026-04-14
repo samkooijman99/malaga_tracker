@@ -6,6 +6,13 @@ function StopsBadge({ stops }) {
   return <span className="badge stops">{stops} stop{stops > 1 ? 's' : ''}</span>
 }
 
+// "11:05 AM on Wed, Apr 15" → "11:05 AM"
+function shortTime(s) {
+  if (!s) return ''
+  const i = s.indexOf(' on ')
+  return i >= 0 ? s.slice(0, i) : s
+}
+
 function priceClass(price, cheapest) {
   const ratio = price / cheapest
   if (ratio <= 1.05) return 'price-cheapest'
@@ -62,12 +69,12 @@ export default function WeekSection({ week, deals }) {
                   </td>
                   <td data-label="Day">{deal.outbound_day.slice(0, 3)}</td>
                   <td className="time-cell" data-label="Outbound">
-                    {deal.outbound_dep}&thinsp;&rarr;&thinsp;{deal.outbound_arr}
+                    {shortTime(deal.outbound_dep)}&thinsp;&rarr;&thinsp;{shortTime(deal.outbound_arr)}
                     <StopsBadge stops={deal.outbound_stops} />
                   </td>
                   <td data-label="Airline">{deal.outbound_airline}</td>
                   <td className="time-cell" data-label="Return">
-                    {deal.return_dep}&thinsp;&rarr;&thinsp;{deal.return_arr}
+                    {shortTime(deal.return_dep)}&thinsp;&rarr;&thinsp;{shortTime(deal.return_arr)}
                     <StopsBadge stops={deal.return_stops} />
                   </td>
                   <td data-label="Airline">{deal.return_airline}</td>

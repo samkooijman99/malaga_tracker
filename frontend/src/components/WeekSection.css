@@ -225,6 +225,15 @@ tbody td {
     border-width: 2px !important;
   }
 
-  .airport-name { display: block; }
-  .time-cell { flex-direction: row; }
+  .airport-name { display: block; word-break: break-word; }
+  .time-cell {
+    flex-direction: row;
+    flex-wrap: wrap;
+    white-space: normal;
+    word-break: break-word;
+  }
+  .iata { font-size: 15px; }
 }
+
+/* Prevent any cell from overflowing horizontally */
+td { min-width: 0; overflow-wrap: anywhere; }
