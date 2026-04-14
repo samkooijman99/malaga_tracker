@@ -89,6 +89,6 @@ highlighted green.
 fast-flights has no documented limit but hammering Google will get you
 blocked. Each run does 3 searches per airport per week (2 outbound + 1
 shared return) = 4 × 3 × 26 = **312 searches per run**, with a 1.5 s
-delay between calls (~8 min total). Weekly cron is the recommended
-cadence; daily should still work but adjust `RATE_LIMIT_DELAY` up if
-Google starts returning empty results.
+delay between calls (~8 min wall-clock). Cron is **daily at 06:00 UTC**.
+If Google starts returning empty results, bump `RATE_LIMIT_DELAY` in
+`flights/config.py` from 1.5 s up (3–5 s).

@@ -19,9 +19,9 @@ SERVER = "root@46.225.235.220"
 SSH_KEY = "~/.ssh/hetzner_id"
 REMOTE_DIR = "/root/malaga_tracker"
 
-# Weekly cron: every Monday at 06:00 UTC
+# Daily cron: every day at 06:00 UTC
 CRON_LINE = (
-    "0 6 * * 1 /bin/bash -c "
+    "0 6 * * * /bin/bash -c "
     "'source /root/.local/bin/env && "
     f"cd {REMOTE_DIR} && "
     "uv run python scraper.py >> "
@@ -104,6 +104,6 @@ step(
 )
 
 print("\nServer is ready.")
-print("The scraper will run every Monday at 06:00 UTC.")
+print("The scraper will run daily at 06:00 UTC.")
 print("To trigger a manual run:")
 print(f"  ssh -i {SSH_KEY} {SERVER} 'cd {REMOTE_DIR} && source /root/.local/bin/env && uv run python scraper.py'")
