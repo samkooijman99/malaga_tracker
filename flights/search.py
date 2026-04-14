@@ -73,6 +73,7 @@ def _search_one_way(from_airport: str, to_airport: str, date_str: str):
             trip="one-way",
             seat="economy",
             passengers=Passengers(adults=1, children=0, infants_in_seat=0, infants_on_lap=0),
+            max_stops=0,  # direct flights only
             fetch_mode="local",  # headless Chromium; handles Google's consent wall
         )
     except Exception as exc:  # fast-flights raises various exceptions
