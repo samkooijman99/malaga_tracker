@@ -19,9 +19,14 @@ function priceClass(price) {
   return 'price-high'                        // red
 }
 
+const PAGE_SIZE = 12
+
 export default function WeekSection({ week, deals }) {
   const [expanded, setExpanded] = useState(false)
+  const [showAll, setShowAll] = useState(false)
   const cheapest = deals[0]?.price_eur ?? Infinity
+  const visible = showAll ? deals : deals.slice(0, PAGE_SIZE)
+  const hidden = deals.length - visible.length
 
   return (
     <section className="week-section">
@@ -60,7 +65,7 @@ export default function WeekSection({ week, deals }) {
               </tr>
             </thead>
             <tbody>
-              {deals.map((deal, i) => (
+              {visible.map((deal, i) => (
                 <tr key={i} className={deal.price_eur === cheapest ? 'row-cheapest' : ''}>
                   <td data-label="Airport">
                     <span className="iata">{deal.origin_iata}</span>
@@ -96,6 +101,16 @@ export default function WeekSection({ week, deals }) {
               ))}
             </tbody>
           </table>
+          {hidden > 0 && (
+            <button type="button" className="load-more" onClick={() => setShowAll(true)}>
+              Show {hidden} more
+            </button>
+          )}
+          {showAll && deals.length > PAGE_SIZE && (
+            <button type="button" className="load-more collapse" onClick={() => setShowAll(false)}>
+              Show fewer
+            </button>
+          )}
         </div>
       )}
     </section>

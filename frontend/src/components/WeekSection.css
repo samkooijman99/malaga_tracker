@@ -153,6 +153,22 @@ tbody td {
 .price-mid       { color: var(--amber); }
 .price-high      { color: var(--red); }
 
+.load-more {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: none;
+  border-top: 1px solid var(--border);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.load-more:hover { background: #f1f3f5; }
+.load-more.collapse { color: var(--muted); font-weight: 500; }
+
 /* === Mobile: convert table rows into cards === */
 @media (max-width: 700px) {
   .week-section { border-radius: 6px; }
