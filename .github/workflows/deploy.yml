@@ -1,0 +1,49 @@
+name: Deploy scraper to Hetzner
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scraper.py'
+      - 'flights/**'
+      - 'pyproject.toml'
+      - '.python-version'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up SSH
+        env:
+          HETZNER_SSH_KEY: ${{ secrets.HETZNER_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$HETZNER_SSH_KEY" > ~/.ssh/hetzner_id
+          chmod 600 ~/.ssh/hetzner_id
+          ssh-keyscan -H 46.225.235.220 >> ~/.ssh/known_hosts
+
+      - name: Rsync project to server
+        run: |
+          rsync -az --delete \
+            --exclude=.venv \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=scraper.log \
+            --exclude=__pycache__ \
+            --exclude='frontend/node_modules' \
+            --exclude='frontend/dist' \
+            -e "ssh -i ~/.ssh/hetzner_id" \
+            ./ root@46.225.235.220:/root/malaga_tracker/
+
+      - name: uv sync on server
+        run: |
+          ssh -i ~/.ssh/hetzner_id root@46.225.235.220 \
+            'cd /root/malaga_tracker && source /root/.local/bin/env && uv sync'
