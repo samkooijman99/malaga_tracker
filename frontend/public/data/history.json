@@ -1,4 +1,411 @@
 {
-  "updated_at": null,
-  "weeks": {}
+  "updated_at": "2026-04-15",
+  "weeks": {
+    "2026-04-15": {
+      "wednesday": "2026-04-15",
+      "label": "Apr 15 / 16 → 19 Apr 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 199.0,
+          "airports": {
+            "BRU": 199.0,
+            "EIN": 318.0,
+            "AMS": 355.0
+          }
+        }
+      ]
+    },
+    "2026-04-22": {
+      "wednesday": "2026-04-22",
+      "label": "Apr 22 / 23 → 26 Apr 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 288.0,
+          "airports": {
+            "BRU": 288.0,
+            "EIN": 404.0,
+            "AMS": 465.0
+          }
+        }
+      ]
+    },
+    "2026-04-29": {
+      "wednesday": "2026-04-29",
+      "label": "Apr 29 / 30 → 3 May 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 329.0,
+          "airports": {
+            "BRU": 329.0,
+            "EIN": 341.0,
+            "AMS": 359.0,
+            "RTM": 382.0
+          }
+        }
+      ]
+    },
+    "2026-05-06": {
+      "wednesday": "2026-05-06",
+      "label": "May 6 / 7 → 10 May 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 129.0,
+          "airports": {
+            "BRU": 129.0,
+            "EIN": 167.0,
+            "AMS": 170.0
+          }
+        }
+      ]
+    },
+    "2026-05-13": {
+      "wednesday": "2026-05-13",
+      "label": "May 13 / 14 → 17 May 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 274.0,
+          "airports": {
+            "BRU": 274.0,
+            "AMS": 286.0,
+            "EIN": 319.0,
+            "RTM": 421.0
+          }
+        }
+      ]
+    },
+    "2026-05-20": {
+      "wednesday": "2026-05-20",
+      "label": "May 20 / 21 → 24 May 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 150.0,
+          "airports": {
+            "BRU": 150.0,
+            "AMS": 170.0,
+            "EIN": 186.0,
+            "RTM": 281.0
+          }
+        }
+      ]
+    },
+    "2026-05-27": {
+      "wednesday": "2026-05-27",
+      "label": "May 27 / 28 → 31 May 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 150.0,
+          "airports": {
+            "BRU": 150.0,
+            "AMS": 152.0,
+            "EIN": 166.0,
+            "RTM": 264.0
+          }
+        }
+      ]
+    },
+    "2026-06-03": {
+      "wednesday": "2026-06-03",
+      "label": "Jun 3 / 4 → 7 Jun 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 113.0,
+          "airports": {
+            "BRU": 113.0,
+            "EIN": 132.0,
+            "AMS": 147.0
+          }
+        }
+      ]
+    },
+    "2026-06-10": {
+      "wednesday": "2026-06-10",
+      "label": "Jun 10 / 11 → 14 Jun 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 97.0,
+          "airports": {
+            "BRU": 97.0,
+            "EIN": 102.0,
+            "AMS": 116.0,
+            "RTM": 169.0
+          }
+        }
+      ]
+    },
+    "2026-06-17": {
+      "wednesday": "2026-06-17",
+      "label": "Jun 17 / 18 → 21 Jun 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 74.0,
+          "airports": {
+            "BRU": 74.0,
+            "EIN": 81.0,
+            "AMS": 105.0,
+            "RTM": 130.0
+          }
+        }
+      ]
+    },
+    "2026-06-24": {
+      "wednesday": "2026-06-24",
+      "label": "Jun 24 / 25 → 28 Jun 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 95.0,
+          "airports": {
+            "BRU": 95.0,
+            "EIN": 111.0,
+            "AMS": 125.0,
+            "RTM": 158.0
+          }
+        }
+      ]
+    },
+    "2026-07-01": {
+      "wednesday": "2026-07-01",
+      "label": "Jul 1 / 2 → 5 Jul 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 111.0,
+          "airports": {
+            "EIN": 111.0,
+            "AMS": 119.0,
+            "BRU": 129.0,
+            "RTM": 129.0
+          }
+        }
+      ]
+    },
+    "2026-07-08": {
+      "wednesday": "2026-07-08",
+      "label": "Jul 8 / 9 → 12 Jul 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 144.0,
+          "airports": {
+            "BRU": 144.0,
+            "EIN": 153.0,
+            "AMS": 175.0
+          }
+        }
+      ]
+    },
+    "2026-07-15": {
+      "wednesday": "2026-07-15",
+      "label": "Jul 15 / 16 → 19 Jul 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 133.0,
+          "airports": {
+            "BRU": 133.0,
+            "AMS": 200.0,
+            "EIN": 214.0
+          }
+        }
+      ]
+    },
+    "2026-07-22": {
+      "wednesday": "2026-07-22",
+      "label": "Jul 22 / 23 → 26 Jul 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 194.0,
+          "airports": {
+            "BRU": 194.0,
+            "AMS": 226.0,
+            "EIN": 249.0
+          }
+        }
+      ]
+    },
+    "2026-07-29": {
+      "wednesday": "2026-07-29",
+      "label": "Jul 29 / 30 → 2 Aug 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 208.0,
+          "airports": {
+            "BRU": 208.0,
+            "AMS": 249.0,
+            "EIN": 252.0
+          }
+        }
+      ]
+    },
+    "2026-08-05": {
+      "wednesday": "2026-08-05",
+      "label": "Aug 5 / 6 → 9 Aug 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 170.0,
+          "airports": {
+            "BRU": 170.0,
+            "EIN": 203.0,
+            "AMS": 209.0,
+            "RTM": 240.0
+          }
+        }
+      ]
+    },
+    "2026-08-12": {
+      "wednesday": "2026-08-12",
+      "label": "Aug 12 / 13 → 16 Aug 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 200.0,
+          "airports": {
+            "BRU": 200.0,
+            "AMS": 215.0,
+            "EIN": 218.0,
+            "RTM": 236.0
+          }
+        }
+      ]
+    },
+    "2026-08-19": {
+      "wednesday": "2026-08-19",
+      "label": "Aug 19 / 20 → 23 Aug 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 167.0,
+          "airports": {
+            "BRU": 167.0,
+            "EIN": 192.0,
+            "AMS": 200.0,
+            "RTM": 218.0
+          }
+        }
+      ]
+    },
+    "2026-08-26": {
+      "wednesday": "2026-08-26",
+      "label": "Aug 26 / 27 → 30 Aug 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 141.0,
+          "airports": {
+            "BRU": 141.0,
+            "EIN": 144.0,
+            "AMS": 148.0,
+            "RTM": 177.0
+          }
+        }
+      ]
+    },
+    "2026-09-02": {
+      "wednesday": "2026-09-02",
+      "label": "Sep 2 / 3 → 6 Sep 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 99.0,
+          "airports": {
+            "BRU": 99.0,
+            "AMS": 107.0,
+            "EIN": 110.0
+          }
+        }
+      ]
+    },
+    "2026-09-09": {
+      "wednesday": "2026-09-09",
+      "label": "Sep 9 / 10 → 13 Sep 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 115.0,
+          "airports": {
+            "AMS": 115.0,
+            "BRU": 121.0,
+            "EIN": 142.0,
+            "RTM": 179.0
+          }
+        }
+      ]
+    },
+    "2026-09-16": {
+      "wednesday": "2026-09-16",
+      "label": "Sep 16 / 17 → 20 Sep 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 117.0,
+          "airports": {
+            "BRU": 117.0,
+            "AMS": 132.0,
+            "EIN": 144.0
+          }
+        }
+      ]
+    },
+    "2026-09-23": {
+      "wednesday": "2026-09-23",
+      "label": "Sep 23 / 24 → 27 Sep 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 117.0,
+          "airports": {
+            "BRU": 117.0,
+            "AMS": 155.0,
+            "EIN": 169.0,
+            "RTM": 226.0
+          }
+        }
+      ]
+    },
+    "2026-09-30": {
+      "wednesday": "2026-09-30",
+      "label": "Sep 30 / 1 → 4 Oct 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 138.0,
+          "airports": {
+            "BRU": 138.0,
+            "AMS": 152.0,
+            "EIN": 197.0,
+            "RTM": 198.0
+          }
+        }
+      ]
+    },
+    "2026-10-07": {
+      "wednesday": "2026-10-07",
+      "label": "Oct 7 / 8 → 11 Oct 2026",
+      "snapshots": [
+        {
+          "date": "2026-04-15",
+          "cheapest": 120.0,
+          "airports": {
+            "BRU": 120.0,
+            "RTM": 134.0,
+            "AMS": 135.0,
+            "EIN": 146.0
+          }
+        }
+      ]
+    }
+  }
 }
