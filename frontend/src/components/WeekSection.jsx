@@ -21,7 +21,7 @@ function priceClass(price, cheapest) {
 }
 
 export default function WeekSection({ week, deals }) {
-  const [expanded, setExpanded] = useState(true)
+  const [expanded, setExpanded] = useState(false)
   const cheapest = deals[0]?.price_eur ?? Infinity
 
   return (
