@@ -141,6 +141,14 @@ tbody td {
   font-family: monospace;
   white-space: nowrap;
 }
+.price-col .total { display: block; }
+.price-col .price-split {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 2px;
+}
 .price-cheapest { color: var(--green); }
 .price-mid       { color: var(--amber); }
 .price-high      { color: var(--red); }

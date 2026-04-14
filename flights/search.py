@@ -149,6 +149,7 @@ def search_all_deals(week: dict) -> list[Deal]:
                     outbound_arr=getattr(out_flight, "arrival", "") or "",
                     outbound_airline=getattr(out_flight, "name", "") or "",
                     outbound_stops=int(getattr(out_flight, "stops", 0) or 0),
+                    outbound_price_eur=round(out_price, 2),
                     return_date=week["sunday"],
                     return_iata=ret_iata,
                     return_name=AIRPORTS[ret_iata]["name"],
@@ -156,6 +157,7 @@ def search_all_deals(week: dict) -> list[Deal]:
                     return_arr=getattr(ret_flight, "arrival", "") or "",
                     return_airline=getattr(ret_flight, "name", "") or "",
                     return_stops=int(getattr(ret_flight, "stops", 0) or 0),
+                    return_price_eur=round(ret_price, 2),
                     price_eur=round(total, 2),
                 )
             )

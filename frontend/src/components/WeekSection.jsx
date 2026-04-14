@@ -83,7 +83,14 @@ export default function WeekSection({ week, deals }) {
                   </td>
                   <td data-label="Airline">{deal.return_airline}</td>
                   <td data-label="Price" className={`price-col ${priceClass(deal.price_eur)}`}>
-                    &euro;{Math.round(deal.price_eur)}
+                    <span className="total">&euro;{Math.round(deal.price_eur)}</span>
+                    {deal.outbound_price_eur != null && deal.return_price_eur != null && (
+                      <span className="price-split">
+                        &euro;{Math.round(deal.outbound_price_eur)}
+                        &thinsp;+&thinsp;
+                        &euro;{Math.round(deal.return_price_eur)}
+                      </span>
+                    )}
                   </td>
                 </tr>
               ))}
