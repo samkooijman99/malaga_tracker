@@ -15,6 +15,24 @@ FLIGHTS_JSON_PATH = "frontend/public/data/flights.json"
 logger = logging.getLogger(__name__)
 
 
+def fetch_existing_flights(token: str, repo: str) -> dict | None:
+    """Return the current flights.json payload from the repo, or None if absent."""
+    url = f"https://api.github.com/repos/{repo}/contents/{FLIGHTS_JSON_PATH}"
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github.v3+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+    try:
+        r = requests.get(url, headers=headers, timeout=30)
+        if r.status_code != 200:
+            return None
+        raw = base64.b64decode(r.json()["content"]).decode()
+        return json.loads(raw)
+    except Exception:
+        return None
+
+
 def push_flights_json(data: dict, token: str, repo: str) -> None:
     """
     Commit an updated flights.json to the repo.
