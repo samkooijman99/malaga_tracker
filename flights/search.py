@@ -98,19 +98,24 @@ def search_all_deals(week: dict) -> list[Deal]:
     deals: list[Deal] = []
 
     for origin, origin_info in AIRPORTS.items():
+        logger.info("  %s return from AGP on %s ...", origin, week["sunday"])
         ret = _search_one_way(DESTINATION, origin, week["sunday"])
         time.sleep(RATE_LIMIT_DELAY)
         if not ret:
-            logger.info("  no return found for %s on %s", origin, week["sunday"])
+            logger.info("    no return found")
             continue
         ret_flight, ret_price = ret
+        logger.info("    return €%.0f via %s", ret_price, ret_flight.name)
 
         for outbound_date in (week["wednesday"], week["thursday"]):
+            logger.info("  %s outbound to AGP on %s ...", origin, outbound_date)
             out = _search_one_way(origin, DESTINATION, outbound_date)
             time.sleep(RATE_LIMIT_DELAY)
             if not out:
+                logger.info("    no outbound found")
                 continue
             out_flight, out_price = out
+            logger.info("    outbound €%.0f via %s → total €%.0f", out_price, out_flight.name, out_price + ret_price)
             outbound_day = date.fromisoformat(outbound_date).strftime("%A")
 
             deals.append(

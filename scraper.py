@@ -52,14 +52,18 @@ def main() -> None:
         else:
             logger.info("  no deals found")
 
-    payload = {
-        "generated_at": datetime.utcnow().isoformat(),
-        "weeks": weeks_data,
-    }
+        # Push incrementally so the site updates as we go
+        payload = {
+            "generated_at": datetime.utcnow().isoformat(),
+            "weeks": weeks_data,
+            "progress": {"completed": i, "total": len(weeks)},
+        }
+        try:
+            push_flights_json(payload, GITHUB_TOKEN, GITHUB_REPO)
+        except Exception as exc:  # don't abort the run on a transient GitHub error
+            logger.warning("  GitHub push failed (continuing): %s", exc)
 
-    logger.info("Pushing to GitHub repo %s ...", GITHUB_REPO)
-    push_flights_json(payload, GITHUB_TOKEN, GITHUB_REPO)
-    logger.info("Done.")
+    logger.info("Done — %d weeks committed.", len(weeks_data))
 
 
 if __name__ == "__main__":

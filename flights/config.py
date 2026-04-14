@@ -1,4 +1,5 @@
 import os
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -21,4 +22,4 @@ DEPARTURE_WEEKDAYS = (2, 3)  # Wednesday, Thursday
 RETURN_WEEKDAY = 6            # Sunday
 
 WEEKS_AHEAD = 26
-RATE_LIMIT_DELAY = 60  # seconds between Google Flights scrapes — generous gap to avoid blocking (≈5.2 h per run for 312 searches)
+RATE_LIMIT_DELAY = float(os.environ.get("RATE_LIMIT_DELAY", "60"))  # seconds between Google Flights scrapes — overridable for initial backfill (e.g. RATE_LIMIT_DELAY=5)

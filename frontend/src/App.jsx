@@ -26,15 +26,18 @@ export default function App() {
   if (!data) return <div className="state-msg">Loading flights...</div>
 
   const airports = ['ALL', 'AMS', 'BRU', 'EIN', 'RTM']
-  const updatedAt = new Date(data.generated_at).toLocaleDateString('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
-  })
+  const updatedAt = data.generated_at
+    ? new Date(data.generated_at).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+      })
+    : 'never'
 
-  // Global cheapest deal
   const allDeals = data.weeks.flatMap(w => w.deals)
   const globalCheapest = allDeals.length
     ? Math.min(...allDeals.map(d => d.price_eur))
     : null
+
+  const progress = data.progress  // {completed, total} when a run is in progress
 
   return (
     <div className="app">
@@ -47,7 +50,14 @@ export default function App() {
               Cheapest in 6 months: <strong>&euro;{Math.round(globalCheapest)}</strong>
             </p>
           )}
-          <p className="updated">Updated {updatedAt}</p>
+          <p className="updated">
+            Updated {updatedAt}
+            {progress && progress.completed < progress.total && (
+              <span className="progress-chip">
+                &nbsp;• scraping {progress.completed}/{progress.total} weeks
+              </span>
+            )}
+          </p>
         </div>
       </header>
 
@@ -64,19 +74,29 @@ export default function App() {
       </div>
 
       <main className="main">
-        {data.weeks.map((weekData, i) => {
-          const deals = filter === 'ALL'
-            ? weekData.deals
-            : weekData.deals.filter(d => d.origin_iata === filter)
-          if (!deals.length) return null
-          return (
-            <WeekSection
-              key={i}
-              week={weekData.week}
-              deals={deals}
-            />
-          )
-        })}
+        {data.weeks.length === 0 ? (
+          <div className="state-msg">
+            <p><strong>No flight data yet.</strong></p>
+            <p className="muted">
+              The first scrape is running on the server. Come back in ~25&nbsp;min
+              (or whenever the cron finishes) and refresh.
+            </p>
+          </div>
+        ) : (
+          data.weeks.map((weekData, i) => {
+            const deals = filter === 'ALL'
+              ? weekData.deals
+              : weekData.deals.filter(d => d.origin_iata === filter)
+            if (!deals.length) return null
+            return (
+              <WeekSection
+                key={i}
+                week={weekData.week}
+                deals={deals}
+              />
+            )
+          })
+        )}
       </main>
     </div>
   )

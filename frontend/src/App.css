@@ -33,6 +33,10 @@
   font-size: 12px;
   color: var(--muted);
 }
+.progress-chip {
+  color: var(--accent);
+  font-weight: 600;
+}
 
 /* Filter bar */
 .filter-bar {
