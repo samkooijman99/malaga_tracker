@@ -19,9 +19,10 @@ SERVER = "root@46.225.235.220"
 SSH_KEY = "~/.ssh/hetzner_id"
 REMOTE_DIR = "/root/malaga_tracker"
 
-# Daily cron: every day at 06:00 UTC
+# Cron: every 8 hours (00:00, 08:00, 16:00 UTC). Each run takes ~5.2 h
+# with a 60 s inter-query delay, so ~3 h idle between runs.
 CRON_LINE = (
-    "0 6 * * * /bin/bash -c "
+    "0 */8 * * * /bin/bash -c "
     "'source /root/.local/bin/env && "
     f"cd {REMOTE_DIR} && "
     "uv run python scraper.py >> "
