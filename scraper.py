@@ -11,7 +11,7 @@ Usage:
 """
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 
 from flights.config import GITHUB_REPO, GITHUB_TOKEN, WEEKS_AHEAD
 from flights.github_push import push_flights_json
@@ -55,7 +55,7 @@ def main() -> None:
 
         # Push incrementally so the site updates as we go
         payload = {
-            "generated_at": datetime.utcnow().isoformat(),
+            "generated_at": datetime.now(timezone.utc).isoformat(),
             "weeks": weeks_data,
             "progress": {"completed": i, "total": len(weeks)},
         }

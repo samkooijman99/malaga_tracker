@@ -43,9 +43,11 @@ export default function App() {
 
   const airports = ['ALL', 'AMS', 'BRU', 'EIN', 'RTM']
   const updatedAt = data.generated_at
-    ? new Date(data.generated_at).toLocaleDateString('en-GB', {
-        day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
-      })
+    ? new Date(data.generated_at).toLocaleString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric',
+        hour: '2-digit', minute: '2-digit',
+        timeZone: 'Europe/Amsterdam',
+      }) + ' CET'
     : 'never'
 
   const allDeals = data.weeks.flatMap(w => w.deals)
