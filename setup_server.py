@@ -96,6 +96,12 @@ print("  done")
 # 5. Install Python deps
 step("uv sync", f"cd {REMOTE_DIR} && source /root/.local/bin/env && uv sync")
 
+# 5b. Install Playwright Chromium + OS deps (handles Google consent wall)
+step(
+    "playwright install chromium",
+    f"cd {REMOTE_DIR} && source /root/.local/bin/env && uv run playwright install --with-deps chromium",
+)
+
 # 6. Install cron job (idempotent)
 step(
     "Install cron job",
