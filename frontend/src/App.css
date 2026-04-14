@@ -56,9 +56,12 @@
   font-size: 14px;
 }
 .global-cheapest strong {
-  color: var(--green);
   font-size: 16px;
 }
+/* shared across App & WeekSection */
+.price-cheapest { color: var(--green); }
+.price-mid      { color: var(--amber); }
+.price-high     { color: var(--red); }
 .updated {
   margin: 0;
   font-size: 12px;

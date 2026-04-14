@@ -75,7 +75,12 @@ export default function App() {
           <p className="subtitle">AMS / BRU / EIN / RTM &rarr; AGP &nbsp;&bull;&nbsp; Wed/Thu out, Sun return</p>
           {view === 'main' && globalCheapest && (
             <p className="global-cheapest">
-              Cheapest in 6 months: <strong>&euro;{Math.round(globalCheapest)}</strong>
+              Cheapest in 6 months:{' '}
+              <strong className={
+                globalCheapest < 100 ? 'price-cheapest'
+                : globalCheapest < 250 ? 'price-mid'
+                : 'price-high'
+              }>&euro;{Math.round(globalCheapest)}</strong>
             </p>
           )}
           <p className="updated">

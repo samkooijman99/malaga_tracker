@@ -13,11 +13,10 @@ function shortTime(s) {
   return i >= 0 ? s.slice(0, i) : s
 }
 
-function priceClass(price, cheapest) {
-  const ratio = price / cheapest
-  if (ratio <= 1.05) return 'price-cheapest'
-  if (ratio <= 1.25) return 'price-mid'
-  return 'price-high'
+function priceClass(price) {
+  if (price < 100) return 'price-cheapest'  // green
+  if (price < 250) return 'price-mid'       // orange
+  return 'price-high'                        // red
 }
 
 export default function WeekSection({ week, deals }) {
@@ -41,7 +40,7 @@ export default function WeekSection({ week, deals }) {
         </div>
         <div className="week-summary">
           <span className="from">from </span>
-          <span className="week-best-price">&euro;{Math.round(cheapest)}</span>
+          <span className={`week-best-price ${priceClass(cheapest)}`}>&euro;{Math.round(cheapest)}</span>
           <span className="chevron">{expanded ? '▲' : '▼'}</span>
         </div>
       </div>
@@ -83,7 +82,7 @@ export default function WeekSection({ week, deals }) {
                     )}
                   </td>
                   <td data-label="Airline">{deal.return_airline}</td>
-                  <td data-label="Price" className={`price-col ${priceClass(deal.price_eur, cheapest)}`}>
+                  <td data-label="Price" className={`price-col ${priceClass(deal.price_eur)}`}>
                     &euro;{Math.round(deal.price_eur)}
                   </td>
                 </tr>
