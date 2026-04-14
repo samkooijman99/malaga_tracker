@@ -4,10 +4,24 @@ import './App.css'
 
 const DATA_URL = import.meta.env.BASE_URL + 'data/flights.json'
 
+// "11:05 AM" or "4:05 PM" → 11.08 or 16.08 (24h decimal)
+function parseHour(s) {
+  if (!s) return null
+  const m = s.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i)
+  if (!m) return null
+  let h = parseInt(m[1], 10)
+  const min = parseInt(m[2], 10)
+  const pm = m[3].toUpperCase() === 'PM'
+  if (pm && h !== 12) h += 12
+  if (!pm && h === 12) h = 0
+  return h + min / 60
+}
+
 export default function App() {
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
   const [filter, setFilter] = useState('ALL')
+  const [eveningOnly, setEveningOnly] = useState(false)
 
   useEffect(() => {
     fetch(DATA_URL, { cache: 'no-cache' })
@@ -71,6 +85,13 @@ export default function App() {
             {ap}
           </button>
         ))}
+        <button
+          className={`time-filter ${eveningOnly ? 'active' : ''}`}
+          onClick={() => setEveningOnly(v => !v)}
+          title="Only show deals whose outbound flight departs at or after 17:00"
+        >
+          {eveningOnly ? '✓ ' : ''}Evening only (17:00+)
+        </button>
       </div>
 
       <main className="main">
@@ -84,9 +105,15 @@ export default function App() {
           </div>
         ) : (
           data.weeks.map((weekData, i) => {
-            const deals = filter === 'ALL'
+            let deals = filter === 'ALL'
               ? weekData.deals
               : weekData.deals.filter(d => d.origin_iata === filter)
+            if (eveningOnly) {
+              deals = deals.filter(d => {
+                const h = parseHour(d.outbound_dep)
+                return h !== null && h >= 17
+              })
+            }
             if (!deals.length) return null
             return (
               <WeekSection

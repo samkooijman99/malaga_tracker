@@ -73,6 +73,14 @@
   border-color: var(--accent);
   color: #fff;
 }
+.filter-bar .time-filter {
+  margin-left: auto;
+  font-weight: 500;
+}
+.filter-bar .time-filter.active {
+  background: var(--green);
+  border-color: var(--green);
+}
 
 /* State messages */
 .state-msg {
