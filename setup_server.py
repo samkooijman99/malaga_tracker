@@ -19,8 +19,9 @@ SERVER = "root@46.225.235.220"
 SSH_KEY = "~/.ssh/hetzner_id"
 REMOTE_DIR = "/root/malaga_tracker"
 
-# Cron: every 8 hours (00:00, 08:00, 16:00 UTC). Each run takes ~5.2 h
-# with a 60 s inter-query delay, so ~3 h idle between runs.
+# Cron: every 8 hours (00:00, 08:00, 16:00 Amsterdam). Each run takes
+# ~5.2 h with a 60 s inter-query delay, so ~3 h idle between runs.
+# The crontab on the server has `CRON_TZ=Europe/Amsterdam` at the top.
 CRON_LINE = (
     "0 */8 * * * /bin/bash -c "
     "'source /root/.local/bin/env && "

@@ -20,9 +20,12 @@ Structure:
 import base64
 import json
 import logging
-from datetime import date
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import requests
+
+AMS_TZ = ZoneInfo("Europe/Amsterdam")
 
 HISTORY_PATH = "frontend/public/data/history.json"
 
@@ -52,7 +55,7 @@ def update_history(weeks_data: list, token: str, repo: str) -> None:
             logger.warning("history.json unreadable (starting fresh): %s", exc)
 
     weeks_dict: dict = existing.get("weeks", {})
-    today = date.today().isoformat()
+    today = datetime.now(AMS_TZ).date().isoformat()
 
     for w in weeks_data:
         week = w["week"]

@@ -4,8 +4,11 @@ import base64
 import json
 import logging
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import requests
+
+AMS_TZ = ZoneInfo("Europe/Amsterdam")
 
 FLIGHTS_JSON_PATH = "frontend/public/data/flights.json"
 
@@ -33,7 +36,7 @@ def push_flights_json(data: dict, token: str, repo: str) -> None:
     ).decode()
 
     payload: dict = {
-        "message": f"data: update flight prices {datetime.utcnow().date()}",
+        "message": f"data: update flight prices {datetime.now(AMS_TZ).date()}",
         "content": content,
     }
     if sha:
