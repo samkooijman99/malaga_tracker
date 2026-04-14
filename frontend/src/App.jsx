@@ -90,7 +90,7 @@ export default function App() {
           onClick={() => setEveningOnly(v => !v)}
           title="Only show deals whose outbound flight departs at or after 17:00"
         >
-          {eveningOnly ? '✓ ' : ''}Evening only (17:00+)
+          {eveningOnly ? '✓ ' : ''}Evening only dep (17:00+)
         </button>
       </div>
 
