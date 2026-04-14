@@ -13,6 +13,8 @@ class Deal:
     outbound_airline: str  # "Transavia"
     outbound_stops: int
     return_date: str
+    return_iata: str         # airport the return lands at (may differ from origin_iata)
+    return_name: str
     return_dep: str
     return_arr: str
     return_airline: str
@@ -31,6 +33,8 @@ class Deal:
             "outbound_airline": self.outbound_airline,
             "outbound_stops": self.outbound_stops,
             "return_date": self.return_date,
+            "return_iata": self.return_iata,
+            "return_name": self.return_name,
             "return_dep": self.return_dep,
             "return_arr": self.return_arr,
             "return_airline": self.return_airline,

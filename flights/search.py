@@ -95,30 +95,49 @@ def _search_one_way(from_airport: str, to_airport: str, date_str: str):
 
 
 def search_all_deals(week: dict) -> list[Deal]:
-    """Search all airport × outbound-day combos for one week."""
-    deals: list[Deal] = []
-
-    for origin, origin_info in AIRPORTS.items():
-        logger.info("  %s return from AGP on %s ...", origin, week["sunday"])
-        ret = _search_one_way(DESTINATION, origin, week["sunday"])
+    """
+    For one week:
+      - search AGP→each airport on Sunday (returns dict of per-airport returns)
+      - search each_airport→AGP on Wed and Thu
+      - pair each outbound with the cheapest return across ALL 4 airports
+        (NL/BE is small enough to land at any airport)
+    """
+    # 1. All returns — one per airport
+    returns: dict[str, tuple] = {}
+    for origin in AIRPORTS:
+        logger.info("  return AGP→%s on %s ...", origin, week["sunday"])
+        r = _search_one_way(DESTINATION, origin, week["sunday"])
         time.sleep(RATE_LIMIT_DELAY)
-        if not ret:
-            logger.info("    no return found")
-            continue
-        ret_flight, ret_price = ret
-        logger.info("    return €%.0f via %s", ret_price, ret_flight.name)
+        if r:
+            returns[origin] = r
+            logger.info("    €%.0f via %s", r[1], r[0].name)
+        else:
+            logger.info("    none")
 
+    if not returns:
+        return []
+
+    # 2. All outbounds — per origin × Wed/Thu; pair each with cheapest return
+    deals: list[Deal] = []
+    for origin, origin_info in AIRPORTS.items():
         for outbound_date in (week["wednesday"], week["thursday"]):
-            logger.info("  %s outbound to AGP on %s ...", origin, outbound_date)
+            logger.info("  outbound %s→AGP on %s ...", origin, outbound_date)
             out = _search_one_way(origin, DESTINATION, outbound_date)
             time.sleep(RATE_LIMIT_DELAY)
             if not out:
-                logger.info("    no outbound found")
+                logger.info("    none")
                 continue
             out_flight, out_price = out
-            logger.info("    outbound €%.0f via %s → total €%.0f", out_price, out_flight.name, out_price + ret_price)
-            outbound_day = date.fromisoformat(outbound_date).strftime("%A")
 
+            # Pick cheapest return across all airports (may differ from origin)
+            ret_iata, (ret_flight, ret_price) = min(returns.items(), key=lambda kv: kv[1][1])
+            total = out_price + ret_price
+            logger.info(
+                "    outbound €%.0f via %s → pair with AGP→%s €%.0f = €%.0f total",
+                out_price, out_flight.name, ret_iata, ret_price, total,
+            )
+
+            outbound_day = date.fromisoformat(outbound_date).strftime("%A")
             deals.append(
                 Deal(
                     origin_iata=origin,
@@ -131,11 +150,13 @@ def search_all_deals(week: dict) -> list[Deal]:
                     outbound_airline=getattr(out_flight, "name", "") or "",
                     outbound_stops=int(getattr(out_flight, "stops", 0) or 0),
                     return_date=week["sunday"],
+                    return_iata=ret_iata,
+                    return_name=AIRPORTS[ret_iata]["name"],
                     return_dep=getattr(ret_flight, "departure", "") or "",
                     return_arr=getattr(ret_flight, "arrival", "") or "",
                     return_airline=getattr(ret_flight, "name", "") or "",
                     return_stops=int(getattr(ret_flight, "stops", 0) or 0),
-                    price_eur=round(out_price + ret_price, 2),
+                    price_eur=round(total, 2),
                 )
             )
 

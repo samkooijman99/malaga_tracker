@@ -76,6 +76,11 @@ export default function WeekSection({ week, deals }) {
                   <td className="time-cell" data-label="Return">
                     {shortTime(deal.return_dep)}&thinsp;&rarr;&thinsp;{shortTime(deal.return_arr)}
                     <StopsBadge stops={deal.return_stops} />
+                    {deal.return_iata && deal.return_iata !== deal.origin_iata && (
+                      <span className="return-airport" title={`Lands at ${deal.return_name}`}>
+                        to <strong>{deal.return_iata}</strong>
+                      </span>
+                    )}
                   </td>
                   <td data-label="Airline">{deal.return_airline}</td>
                   <td data-label="Price" className={`price-col ${priceClass(deal.price_eur, cheapest)}`}>

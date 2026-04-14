@@ -125,6 +125,15 @@ tbody td {
   background: #fff3cd;
   color: #664d03;
 }
+.return-airport {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #cfe2ff;
+  color: #052c65;
+  white-space: nowrap;
+}
+.return-airport strong { font-family: monospace; }
 
 /* Price column */
 .price-col {
