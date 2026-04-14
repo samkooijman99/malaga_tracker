@@ -8,13 +8,19 @@ export default function App() {
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
   const [filter, setFilter] = useState('ALL')
+  const [refreshing, setRefreshing] = useState(false)
 
-  useEffect(() => {
-    fetch(DATA_URL)
+  const loadData = (bustCache = false) => {
+    setRefreshing(true)
+    setError(null)
+    const url = bustCache ? `${DATA_URL}?t=${Date.now()}` : DATA_URL
+    fetch(url, { cache: 'reload' })
       .then(r => { if (!r.ok) throw new Error(r.statusText); return r.json() })
-      .then(setData)
-      .catch(setError)
-  }, [])
+      .then(d => { setData(d); setRefreshing(false) })
+      .catch(e => { setError(e); setRefreshing(false) })
+  }
+
+  useEffect(() => { loadData() }, [])
 
   if (error) return (
     <div className="state-msg">
@@ -57,6 +63,15 @@ export default function App() {
                 &nbsp;• scraping {progress.completed}/{progress.total} weeks
               </span>
             )}
+            <button
+              type="button"
+              className="refresh-btn"
+              onClick={() => loadData(true)}
+              disabled={refreshing}
+              title="Fetch latest flights.json (bypasses cache)"
+            >
+              {refreshing ? 'Refreshing...' : '↻ Refresh'}
+            </button>
           </p>
         </div>
       </header>
