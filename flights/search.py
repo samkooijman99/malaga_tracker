@@ -164,5 +164,15 @@ def search_all_deals(week: dict) -> list[Deal]:
                     )
 
     deals.sort(key=lambda d: d.price_eur)
-    # Cap per week — avoid exposing 100+ redundant combos
-    return deals[:100]
+    # Keep top-N per (origin, return_iata) pair so every filter combination
+    # stays populated — a flat global cap would starve expensive pairs.
+    PER_PAIR_LIMIT = 8
+    per_pair: dict[tuple[str, str], int] = {}
+    kept: list[Deal] = []
+    for d in deals:
+        key = (d.origin_iata, d.return_iata)
+        if per_pair.get(key, 0) >= PER_PAIR_LIMIT:
+            continue
+        per_pair[key] = per_pair.get(key, 0) + 1
+        kept.append(d)
+    return kept
