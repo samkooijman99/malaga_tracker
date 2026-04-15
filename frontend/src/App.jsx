@@ -18,8 +18,8 @@ function parseHour(s) {
   return h + min / 60
 }
 
-// Approximate wall-clock time for one week's scrape (11 searches × ~60s).
-const WEEK_SCRAPE_SECONDS = 11 * 60
+// Approximate wall-clock time for one week's scrape (~13 min observed on server).
+const WEEK_SCRAPE_SECONDS = 13 * 60
 
 export default function App() {
   const [data, setData] = useState(null)
