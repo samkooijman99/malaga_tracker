@@ -103,11 +103,12 @@ export default function App() {
                 : 0
               const weekPct = Math.min(Math.max(Math.round((elapsed / WEEK_SCRAPE_SECONDS) * 100), 0), 99)
               return (
-                <span
-                  className="progress-chip"
-                  title={`Current week ~${weekPct}% done (est.)`}
-                >
-                  &nbsp;• scraping {progress.completed}/{progress.total} weeks
+                <span className="progress-chip">
+                  &nbsp;• scraping {progress.completed}/{progress.total} weeks{' '}
+                  <span
+                    className="info-icon"
+                    title={`Current week ~${weekPct}% done (est.)`}
+                  >ⓘ</span>
                 </span>
               )
             })()}

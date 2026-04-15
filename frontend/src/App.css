@@ -71,6 +71,16 @@
   color: var(--accent);
   font-weight: 600;
 }
+.info-icon {
+  display: inline-block;
+  margin-left: 2px;
+  cursor: help;
+  font-weight: 400;
+  opacity: 0.8;
+}
+.info-icon:hover {
+  opacity: 1;
+}
 
 @media (max-width: 600px) {
   .app { padding: 0 10px 32px; }
