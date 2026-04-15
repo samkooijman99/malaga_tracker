@@ -18,6 +18,9 @@ function parseHour(s) {
   return h + min / 60
 }
 
+// Approximate wall-clock time for one week's scrape (11 searches × ~60s).
+const WEEK_SCRAPE_SECONDS = 11 * 60
+
 export default function App() {
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
@@ -25,12 +28,18 @@ export default function App() {
   const [retFilter, setRetFilter] = useState('ALL')
   const [eveningOnly, setEveningOnly] = useState(false)
   const [view, setView] = useState('main')  // 'main' | 'analysis'
+  const [, setTick] = useState(0)  // re-render so week-progress % stays fresh
 
   useEffect(() => {
     fetch(DATA_URL, { cache: 'no-cache' })
       .then(r => { if (!r.ok) throw new Error(r.statusText); return r.json() })
       .then(setData)
       .catch(setError)
+  }, [])
+
+  useEffect(() => {
+    const id = setInterval(() => setTick(t => t + 1), 15_000)
+    return () => clearInterval(id)
   }, [])
 
   if (error) return (
@@ -88,14 +97,20 @@ export default function App() {
           )}
           <p className="updated">
             Updated {updatedAt}
-            {progress && progress.completed < progress.total && (
-              <span
-                className="progress-chip"
-                title={`${Math.round((progress.completed / progress.total) * 100)}% complete`}
-              >
-                &nbsp;• scraping {progress.completed}/{progress.total} weeks
-              </span>
-            )}
+            {progress && progress.completed < progress.total && (() => {
+              const elapsed = data.generated_at
+                ? (Date.now() - new Date(data.generated_at).getTime()) / 1000
+                : 0
+              const weekPct = Math.min(Math.max(Math.round((elapsed / WEEK_SCRAPE_SECONDS) * 100), 0), 99)
+              return (
+                <span
+                  className="progress-chip"
+                  title={`Current week ~${weekPct}% done (est.)`}
+                >
+                  &nbsp;• scraping {progress.completed}/{progress.total} weeks
+                </span>
+              )
+            })()}
           </p>
         </div>
       </header>
