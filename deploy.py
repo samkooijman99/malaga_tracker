@@ -33,6 +33,7 @@ run(
         "--exclude=.venv",
         "--exclude=.git",
         "--exclude=.github",
+        "--exclude=.env",
         "--exclude=scraper.log",
         "--exclude=__pycache__",
         "--exclude=frontend/node_modules",
