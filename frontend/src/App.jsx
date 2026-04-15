@@ -21,7 +21,8 @@ function parseHour(s) {
 export default function App() {
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
-  const [filter, setFilter] = useState('ALL')
+  const [depFilter, setDepFilter] = useState('ALL')
+  const [retFilter, setRetFilter] = useState('ALL')
   const [eveningOnly, setEveningOnly] = useState(false)
   const [view, setView] = useState('main')  // 'main' | 'analysis'
 
@@ -88,7 +89,10 @@ export default function App() {
           <p className="updated">
             Updated {updatedAt}
             {progress && progress.completed < progress.total && (
-              <span className="progress-chip">
+              <span
+                className="progress-chip"
+                title={`${Math.round((progress.completed / progress.total) * 100)}% complete`}
+              >
                 &nbsp;• scraping {progress.completed}/{progress.total} weeks
               </span>
             )}
@@ -98,15 +102,18 @@ export default function App() {
 
       {view === 'main' && (
         <div className="filter-bar">
-          {airports.map(ap => (
-            <button
-              key={ap}
-              className={filter === ap ? 'active' : ''}
-              onClick={() => setFilter(ap)}
-            >
-              {ap}
-            </button>
-          ))}
+          <label className="select-filter">
+            <span>dep:</span>
+            <select value={depFilter} onChange={e => setDepFilter(e.target.value)}>
+              {airports.map(ap => <option key={ap} value={ap}>{ap}</option>)}
+            </select>
+          </label>
+          <label className="select-filter">
+            <span>inb:</span>
+            <select value={retFilter} onChange={e => setRetFilter(e.target.value)}>
+              {airports.map(ap => <option key={ap} value={ap}>{ap}</option>)}
+            </select>
+          </label>
           <button
             className={`time-filter ${eveningOnly ? 'active' : ''}`}
             onClick={() => setEveningOnly(v => !v)}
@@ -130,9 +137,9 @@ export default function App() {
           </div>
         ) : (
           data.weeks.map((weekData, i) => {
-            let deals = filter === 'ALL'
-              ? weekData.deals
-              : weekData.deals.filter(d => d.origin_iata === filter)
+            let deals = weekData.deals
+            if (depFilter !== 'ALL') deals = deals.filter(d => d.origin_iata === depFilter)
+            if (retFilter !== 'ALL') deals = deals.filter(d => d.return_iata === retFilter)
             if (eveningOnly) {
               deals = deals.filter(d => {
                 const h = parseHour(d.outbound_dep)

@@ -26,10 +26,12 @@ def fetch_existing_flights(token: str, repo: str) -> dict | None:
     try:
         r = requests.get(url, headers=headers, timeout=30)
         if r.status_code != 200:
+            logger.warning("fetch_existing_flights: HTTP %s", r.status_code)
             return None
         raw = base64.b64decode(r.json()["content"]).decode()
         return json.loads(raw)
-    except Exception:
+    except Exception as exc:
+        logger.warning("fetch_existing_flights failed: %s", exc)
         return None
 
 
