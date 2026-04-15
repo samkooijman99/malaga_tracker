@@ -105,10 +105,12 @@ export default function App() {
               return (
                 <span className="progress-chip">
                   &nbsp;• scraping {progress.completed}/{progress.total} weeks{' '}
-                  <span
-                    className="info-icon"
-                    title={`Current week ~${weekPct}% done (est.)`}
-                  >ⓘ</span>
+                  <span className="info-wrap" tabIndex={0}>
+                    <span className="info-icon">ⓘ</span>
+                    <span className="info-tooltip">
+                      Current week ~{weekPct}% done (est.)
+                    </span>
+                  </span>
                 </span>
               )
             })()}
