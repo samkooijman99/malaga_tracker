@@ -19,11 +19,11 @@ SERVER = "root@46.225.235.220"
 SSH_KEY = "~/.ssh/hetzner_id"
 REMOTE_DIR = "/root/malaga_tracker"
 
-# Cron: every 8 hours (00:00, 08:00, 16:00 Amsterdam). Each run takes
+# Cron: every 8 hours at 00:00 / 08:00 / 16:00 UTC. Each run takes
 # ~5.2 h with a 60 s inter-query delay, so ~3 h idle between runs.
-# The crontab on the server has `CRON_TZ=Europe/Amsterdam` at the top.
+# flock -n skips the run if a previous one is still holding the lock.
 CRON_LINE = (
-    "0 */8 * * * /bin/bash -c "
+    "0 */8 * * * /usr/bin/flock -n /tmp/malaga_tracker.lock /bin/bash -c "
     "'source /root/.local/bin/env && "
     f"cd {REMOTE_DIR} && "
     "uv run python scraper.py >> "
@@ -104,11 +104,10 @@ step(
     f"cd {REMOTE_DIR} && source /root/.local/bin/env && uv run playwright install --with-deps chromium",
 )
 
-# 6. Install cron job (idempotent)
+# 6. Install cron job (replace any existing malaga_tracker line in place)
 step(
     "Install cron job",
-    f"(crontab -l 2>/dev/null | grep -qF 'malaga_tracker') || "
-    f"(crontab -l 2>/dev/null; echo '{CRON_LINE}') | crontab -",
+    f"(crontab -l 2>/dev/null | grep -v 'malaga_tracker'; echo '{CRON_LINE}') | crontab -",
 )
 
 print("\nServer is ready.")
