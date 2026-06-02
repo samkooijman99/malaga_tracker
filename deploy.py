@@ -35,6 +35,7 @@ run(
         "--exclude=.github",
         "--exclude=.env",
         "--exclude=scraper.log",
+        "--exclude=bangkok.log",
         "--exclude=__pycache__",
         "--exclude=frontend/node_modules",
         "--exclude=frontend/dist",

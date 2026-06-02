@@ -30,6 +30,13 @@ CRON_LINE = (
     f"{REMOTE_DIR}/scraper.log 2>&1'"
 )
 
+# Bangkok tracker: twice a day at 07:00 / 19:00 Amsterdam time (CRON_TZ honors
+# DST). Calls a wrapper script so the crontab line needs no nested quoting.
+BANGKOK_CRON_LINE = (
+    "0 7,19 * * * /usr/bin/flock -n /tmp/bangkok_tracker.lock "
+    f"{REMOTE_DIR}/run_bangkok.sh >> {REMOTE_DIR}/bangkok.log 2>&1"
+)
+
 
 def ssh(command: str) -> bool:
     result = subprocess.run(
@@ -81,6 +88,7 @@ result = subprocess.run(
         "--exclude=.git",
         "--exclude=.github",
         "--exclude=scraper.log",
+        "--exclude=bangkok.log",
         "--exclude=__pycache__",
         "--exclude=frontend/node_modules",
         "--exclude=frontend/dist",
@@ -110,7 +118,18 @@ step(
     f"(crontab -l 2>/dev/null | grep -v 'malaga_tracker'; echo '{CRON_LINE}') | crontab -",
 )
 
+# 6b. Install the Bangkok tracker cron (07:00/19:00 Amsterdam via CRON_TZ).
+# Filter on 'run_bangkok' + the CRON_TZ marker so the Malaga line is untouched;
+# the CRON_TZ line is appended last so it only affects the Bangkok schedule.
+step(
+    "Install Bangkok cron job",
+    "(crontab -l 2>/dev/null | grep -v -e 'run_bangkok' -e 'CRON_TZ=Europe/Amsterdam'; "
+    "echo 'CRON_TZ=Europe/Amsterdam'; "
+    f"echo '{BANGKOK_CRON_LINE}') | crontab -",
+)
+
 print("\nServer is ready.")
 print("The scraper will run daily at 06:00 UTC.")
+print("The Bangkok tracker will run at 07:00 and 19:00 Amsterdam time.")
 print("To trigger a manual run:")
 print(f"  ssh -i {SSH_KEY} {SERVER} 'cd {REMOTE_DIR} && source /root/.local/bin/env && uv run python scraper.py'")
