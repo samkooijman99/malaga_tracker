@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-11T08:14:07.527724+00:00",
+  "generated_at": "2026-06-11T08:31:31.566251+00:00",
   "weeks": [
     {
       "week": {
@@ -2174,10 +2174,42 @@
           "price_eur": 620.0
         }
       ]
+    },
+    {
+      "week": {
+        "week_number": 2,
+        "wednesday": "2026-06-24",
+        "thursday": "2026-06-25",
+        "sunday": "2026-06-28",
+        "label": "Jun 24 / 25 → 28 Jun 2026"
+      },
+      "deals": [
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-06-25",
+          "outbound_day": "Thursday",
+          "outbound_dep": "7:30 AM on Thu, Jun 25",
+          "outbound_arr": "10:25 AM on Thu, Jun 25",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "outbound_price_eur": 170.0,
+          "return_date": "2026-06-28",
+          "return_iata": "RTM",
+          "return_name": "Rotterdam The Hague",
+          "return_dep": "8:55 AM on Sun, Jun 28",
+          "return_arr": "11:45 AM on Sun, Jun 28",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "return_price_eur": 277.0,
+          "price_eur": 447.0
+        }
+      ]
     }
   ],
   "progress": {
-    "completed": 1,
+    "completed": 2,
     "total": 26
   }
 }
