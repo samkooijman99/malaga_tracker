@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-12T13:24:08.755792+00:00",
+  "generated_at": "2026-06-12T13:41:34.695210+00:00",
   "weeks": [
     {
       "week": {
@@ -57950,11 +57950,75 @@
         "sunday": "2026-12-13",
         "label": "Dec 9 / 10 → 13 Dec 2026"
       },
-      "deals": []
+      "deals": [
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-12-09",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "7:30 AM on Wed, Dec 9",
+          "outbound_arr": "10:20 AM on Wed, Dec 9",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "outbound_price_eur": 84.0,
+          "return_date": "2026-12-13",
+          "return_iata": "EIN",
+          "return_name": "Eindhoven",
+          "return_dep": "8:15 AM on Sun, Dec 13",
+          "return_arr": "11:15 AM on Sun, Dec 13",
+          "return_airline": "Ryanair",
+          "return_stops": 0,
+          "return_price_eur": 61.0,
+          "price_eur": 145.0
+        },
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-12-09",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "7:30 AM on Wed, Dec 9",
+          "outbound_arr": "10:20 AM on Wed, Dec 9",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "outbound_price_eur": 84.0,
+          "return_date": "2026-12-13",
+          "return_iata": "EIN",
+          "return_name": "Eindhoven",
+          "return_dep": "11:30 AM on Sun, Dec 13",
+          "return_arr": "2:30 PM on Sun, Dec 13",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "return_price_eur": 80.0,
+          "price_eur": 164.0
+        },
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-12-09",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "7:30 AM on Wed, Dec 9",
+          "outbound_arr": "10:20 AM on Wed, Dec 9",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "outbound_price_eur": 84.0,
+          "return_date": "2026-12-13",
+          "return_iata": "EIN",
+          "return_name": "Eindhoven",
+          "return_dep": "7:30 PM on Sun, Dec 13",
+          "return_arr": "10:30 PM on Sun, Dec 13",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "return_price_eur": 90.0,
+          "price_eur": 174.0
+        }
+      ]
     }
   ],
   "progress": {
-    "completed": 25,
+    "completed": 26,
     "total": 26
   }
 }
