@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-21T17:11:56.944328+00:00",
+  "generated_at": "2026-06-21T17:28:53.831305+00:00",
   "weeks": [
     {
       "week": {
@@ -7447,10 +7447,84 @@
           "price_eur": 477.0
         }
       ]
+    },
+    {
+      "week": {
+        "week_number": 6,
+        "wednesday": "2026-07-29",
+        "thursday": "2026-07-30",
+        "sunday": "2026-08-02",
+        "label": "Jul 29 / 30 → 2 Aug 2026"
+      },
+      "deals": [
+        {
+          "origin_iata": "EIN",
+          "origin_name": "Eindhoven",
+          "country": "NL",
+          "outbound_date": "2026-07-30",
+          "outbound_day": "Thursday",
+          "outbound_dep": "7:40 AM on Thu, Jul 30",
+          "outbound_arr": "10:30 AM on Thu, Jul 30",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "outbound_price_eur": 104.0,
+          "return_date": "2026-08-02",
+          "return_iata": "RTM",
+          "return_name": "Rotterdam The Hague",
+          "return_dep": "8:55 AM on Sun, Aug 2",
+          "return_arr": "11:45 AM on Sun, Aug 2",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "return_price_eur": 230.0,
+          "price_eur": 334.0
+        },
+        {
+          "origin_iata": "EIN",
+          "origin_name": "Eindhoven",
+          "country": "NL",
+          "outbound_date": "2026-07-30",
+          "outbound_day": "Thursday",
+          "outbound_dep": "11:30 AM on Thu, Jul 30",
+          "outbound_arr": "2:30 PM on Thu, Jul 30",
+          "outbound_airline": "Ryanair",
+          "outbound_stops": 0,
+          "outbound_price_eur": 147.0,
+          "return_date": "2026-08-02",
+          "return_iata": "RTM",
+          "return_name": "Rotterdam The Hague",
+          "return_dep": "8:55 AM on Sun, Aug 2",
+          "return_arr": "11:45 AM on Sun, Aug 2",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "return_price_eur": 230.0,
+          "price_eur": 377.0
+        },
+        {
+          "origin_iata": "RTM",
+          "origin_name": "Rotterdam The Hague",
+          "country": "NL",
+          "outbound_date": "2026-07-29",
+          "outbound_day": "Wednesday",
+          "outbound_dep": "3:20 PM on Wed, Jul 29",
+          "outbound_arr": "6:15 PM on Wed, Jul 29",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "outbound_price_eur": 170.0,
+          "return_date": "2026-08-02",
+          "return_iata": "RTM",
+          "return_name": "Rotterdam The Hague",
+          "return_dep": "8:55 AM on Sun, Aug 2",
+          "return_arr": "11:45 AM on Sun, Aug 2",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "return_price_eur": 230.0,
+          "price_eur": 400.0
+        }
+      ]
     }
   ],
   "progress": {
-    "completed": 5,
+    "completed": 6,
     "total": 26
   }
 }
