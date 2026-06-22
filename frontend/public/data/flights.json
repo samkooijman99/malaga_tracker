@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T00:14:36.183973+00:00",
+  "generated_at": "2026-06-22T00:20:43.958923+00:00",
   "weeks": [
     {
       "week": {
@@ -1649,10 +1649,20 @@
           "price_eur": 586.0
         }
       ]
+    },
+    {
+      "week": {
+        "week_number": 2,
+        "wednesday": "2026-07-01",
+        "thursday": "2026-07-02",
+        "sunday": "2026-07-05",
+        "label": "Jul 1 / 2 → 5 Jul 2026"
+      },
+      "deals": []
     }
   ],
   "progress": {
-    "completed": 1,
+    "completed": 2,
     "total": 26
   }
 }
