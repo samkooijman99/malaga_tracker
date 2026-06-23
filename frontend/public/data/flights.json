@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T12:15:52.356196+00:00",
+  "generated_at": "2026-06-23T12:33:20.691945+00:00",
   "weeks": [
     {
       "week": {
@@ -39100,10 +39100,105 @@
         "label": "Oct 28 / 29 → 1 Nov 2026"
       },
       "deals": []
+    },
+    {
+      "week": {
+        "week_number": 20,
+        "wednesday": "2026-11-04",
+        "thursday": "2026-11-05",
+        "sunday": "2026-11-08",
+        "label": "Nov 4 / 5 → 8 Nov 2026"
+      },
+      "deals": [
+        {
+          "origin_iata": "AMS",
+          "origin_name": "Amsterdam Schiphol",
+          "country": "NL",
+          "outbound_date": "2026-11-05",
+          "outbound_day": "Thursday",
+          "outbound_dep": "7:30 AM on Thu, Nov 5",
+          "outbound_arr": "10:40 AM on Thu, Nov 5",
+          "outbound_airline": "easyJet",
+          "outbound_stops": 0,
+          "outbound_price_eur": 138.0,
+          "return_date": "2026-11-08",
+          "return_iata": "RTM",
+          "return_name": "Rotterdam The Hague",
+          "return_dep": "11:15 AM on Sun, Nov 8",
+          "return_arr": "2:10 PM on Sun, Nov 8",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "return_price_eur": 170.0,
+          "price_eur": 308.0
+        },
+        {
+          "origin_iata": "AMS",
+          "origin_name": "Amsterdam Schiphol",
+          "country": "NL",
+          "outbound_date": "2026-11-05",
+          "outbound_day": "Thursday",
+          "outbound_dep": "4:25 PM on Thu, Nov 5",
+          "outbound_arr": "7:30 PM on Thu, Nov 5",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "outbound_price_eur": 143.0,
+          "return_date": "2026-11-08",
+          "return_iata": "RTM",
+          "return_name": "Rotterdam The Hague",
+          "return_dep": "11:15 AM on Sun, Nov 8",
+          "return_arr": "2:10 PM on Sun, Nov 8",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "return_price_eur": 170.0,
+          "price_eur": 313.0
+        },
+        {
+          "origin_iata": "AMS",
+          "origin_name": "Amsterdam Schiphol",
+          "country": "NL",
+          "outbound_date": "2026-11-05",
+          "outbound_day": "Thursday",
+          "outbound_dep": "6:40 AM on Thu, Nov 5",
+          "outbound_arr": "9:45 AM on Thu, Nov 5",
+          "outbound_airline": "Transavia",
+          "outbound_stops": 0,
+          "outbound_price_eur": 143.0,
+          "return_date": "2026-11-08",
+          "return_iata": "RTM",
+          "return_name": "Rotterdam The Hague",
+          "return_dep": "11:15 AM on Sun, Nov 8",
+          "return_arr": "2:10 PM on Sun, Nov 8",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "return_price_eur": 170.0,
+          "price_eur": 313.0
+        },
+        {
+          "origin_iata": "AMS",
+          "origin_name": "Amsterdam Schiphol",
+          "country": "NL",
+          "outbound_date": "2026-11-05",
+          "outbound_day": "Thursday",
+          "outbound_dep": "12:55 PM on Thu, Nov 5",
+          "outbound_arr": "4:00 PM on Thu, Nov 5",
+          "outbound_airline": "Ryanair",
+          "outbound_stops": 0,
+          "outbound_price_eur": 160.0,
+          "return_date": "2026-11-08",
+          "return_iata": "RTM",
+          "return_name": "Rotterdam The Hague",
+          "return_dep": "11:15 AM on Sun, Nov 8",
+          "return_arr": "2:10 PM on Sun, Nov 8",
+          "return_airline": "Transavia",
+          "return_stops": 0,
+          "return_price_eur": 170.0,
+          "price_eur": 330.0
+        }
+      ]
     }
   ],
   "progress": {
-    "completed": 19,
+    "completed": 20,
     "total": 26
   }
 }
