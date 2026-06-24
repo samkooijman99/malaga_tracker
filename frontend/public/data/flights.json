@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24T03:18:27.708125+00:00",
+  "generated_at": "2026-06-24T03:24:35.687434+00:00",
   "weeks": [
     {
       "week": {
@@ -571,7 +571,7 @@
     },
     {
       "week": {
-        "week_number": 25,
+        "week_number": 24,
         "wednesday": "2026-12-09",
         "thursday": "2026-12-10",
         "sunday": "2026-12-13",
@@ -1054,7 +1054,7 @@
     }
   ],
   "progress": {
-    "completed": 23,
+    "completed": 24,
     "total": 26
   }
 }
