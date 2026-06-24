@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24T17:28:09.847449+00:00",
+  "generated_at": "2026-06-24T17:34:18.516482+00:00",
   "weeks": [
     {
       "week": {
@@ -6688,10 +6688,20 @@
         "label": "Aug 26 / 27 → 30 Aug 2026"
       },
       "deals": []
+    },
+    {
+      "week": {
+        "week_number": 10,
+        "wednesday": "2026-09-02",
+        "thursday": "2026-09-03",
+        "sunday": "2026-09-06",
+        "label": "Sep 2 / 3 → 6 Sep 2026"
+      },
+      "deals": []
     }
   ],
   "progress": {
-    "completed": 9,
+    "completed": 10,
     "total": 26
   }
 }
